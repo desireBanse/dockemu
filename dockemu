@@ -7,4 +7,4 @@ SCRIPT_PATH=`dirname $SCRIPT`
 #echo $AL_ROOT $SCRIPT $SCRIPT_PATH
 
 
-ansible-playbook 
+ansible-playbook dockemu.yml

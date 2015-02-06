@@ -7,3 +7,5 @@
 
   tasks:
   - command: date
+    register: fecha
+  - debug: msg="{{fecha.stdout}}"
