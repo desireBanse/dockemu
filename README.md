@@ -31,3 +31,7 @@ INSTALL DOCKER IMAGE: dockemu
 dockemu local install:
 
 ./dockemu
+
+emergency stop 
+
+docker stop $(docker ps -a -q) && docker rm $(docker ps -a -q)
