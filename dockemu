@@ -15,6 +15,8 @@ print "#######  WELCOME TO DOCKEMU V.1.0  ####### "
 try:
 	bots = input('How many bots do you need? [defaults=%s]: '%bots)
 	print
+except KeyboardInterrupt:
+	sys.exit(0)
 except:
 	print " -- [WARNING] bots not provided, using defaults (%s)"%bots
 	print
@@ -25,15 +27,18 @@ try:
 	if aux != "":
 		server=aux
 	print
+except KeyboardInterrupt:
+	sys.exit(0)
 except:
 	print " -- [WARNING] server not provided, using defaults (%s)"%server
 	print 
-
 
 #duration of the experiment
 try:
 	duration = input('Enter the duration of the attack [defaults=%s s]: '%duration)
 	print
+except KeyboardInterrupt:
+	sys.exit(0)
 except:
 	print " -- [WARNING] duration not provided, using defaults (%s)"%duration
 	print 
@@ -43,6 +48,8 @@ except:
 try:
 	delay = input('Enter the delay between the start of each docker bot [defaults=%s s]: '%delay)
 	print
+except KeyboardInterrupt:
+	sys.exit(0)
 except:
 	print "  -- [WARNING] delay not provided, using defaults (%s)"%delay
 	print
@@ -54,6 +61,17 @@ for i in range(bots):
 	cmd="docker run -d --name dockemu-%s -e 'server=%s' dockemu"%(i,server)
 	print cmd
 	#cmd="echo %s %s %s %s "%(bots,i, duration , delay)
-	#p = subprocess.Popen(cmd , shell=True)
+	p = subprocess.Popen(cmd , shell=True)
 	time.sleep(delay)
+
+
+
+if duration != 0:
+	print
+	print "Waiting %ss to stop all docker botnet"%duration
+	time.sleep(duration)
+	for i in range(bots):
+		cmd="docker kill dockemu-%s"%i
+		print cmd
+		p = subprocess.Popen(cmd , shell=True)
 
