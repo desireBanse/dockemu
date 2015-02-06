@@ -77,7 +77,7 @@ if duration != 0:
 		print cmd
 		try:
 			p = subprocess.Popen(cmd , shell=True)
-			as
+			print s
 		except:
 			print "Did not stop the containers stopping all running containers!!"
 			cmd="docker stop $(docker ps -a -q) && docker rm $(docker ps -a -q)"
