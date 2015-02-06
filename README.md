@@ -1,1 +1,6 @@
 # dockemu
+
+
+#dependecies
+Ansible
+docker
