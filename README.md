@@ -31,6 +31,6 @@ UBUNTU 14.4:
 
 ./dockemu
 
-emergency stop 
+#emergency stop all running containers
 
 docker stop $(docker ps -a -q) && docker rm $(docker ps -a -q)
