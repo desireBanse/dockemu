@@ -2,13 +2,6 @@
 
 
 #dependecies
-1) Ansible
 
-#apt-get instll ansible
+1) docker
 
-
-2) docker
-
-3) docker-py
-
-pip install docker-py
