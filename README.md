@@ -4,7 +4,7 @@
 #dependecies
 docker
 
-#to install dockemu
+# to install dockemu
 
 git clone git@github.com:jmarcos-cano/dockemu.git
 
@@ -22,12 +22,12 @@ UBUNTU 14.4:
 
 
 
-#INSTALL DOCKER IMAGE: dockemu
+#install dockemu docker image 
 
 ./build.sh
 
 
-#dockemu local install:
+# dockemu local install:
 
 ./dockemu
 
