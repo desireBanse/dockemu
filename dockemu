@@ -68,7 +68,7 @@ for i in range(bots):
 	time.sleep(delay)
 
 
-
+failed=false
 if duration != 0:
 	print
 	print "Waiting %ss to stop the attack (all docker botnet)"%duration
@@ -81,7 +81,8 @@ if duration != 0:
 				p = subprocess.Popen(cmd , shell=True)
 				print s
 			except:
-				logging.error("Did not stop the containers stopping all running containers!!")
+				failed=true
+				logging.error("failed to stop %s!!"%i)
 	except:
 		cmd="docker stop $(docker ps -a -q) && docker rm $(docker ps -a -q)"
 		p = subprocess.Popen(cmd , shell=True)
