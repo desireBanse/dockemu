@@ -1,5 +1,5 @@
 #!/usr/bin/python
-import subprocess
+import subprocess, logging
 import sys, os, time
 
 ROOT=os.path.dirname(os.path.abspath(__file__))
@@ -18,7 +18,7 @@ try:
 except KeyboardInterrupt:
 	sys.exit(0)
 except:
-	print " -- [WARNING] bots not provided, using defaults (%s)"%bots
+	logging.warning(" bots not provided, using defaults (%s)"%bots)
 	print
 
 #server to attack
@@ -30,7 +30,7 @@ try:
 except KeyboardInterrupt:
 	sys.exit(0)
 except:
-	print " -- [WARNING] server not provided, using defaults (%s)"%server
+	logging.warning( "server not provided, using defaults (%s)"%server)
 	print 
 
 #duration of the experiment
@@ -40,7 +40,7 @@ try:
 except KeyboardInterrupt:
 	sys.exit(0)
 except:
-	print " -- [WARNING] duration not provided, using defaults (%s)"%duration
+	logging.warning( "duration not provided, using defaults (%s)"%duration)
 	print 
 
 
@@ -51,7 +51,7 @@ try:
 except KeyboardInterrupt:
 	sys.exit(0)
 except:
-	print "  -- [WARNING] delay not provided, using defaults (%s)"%delay
+	logging.warning( "delay not provided, using defaults (%s)"%delay)
 	print
 
 
@@ -61,9 +61,10 @@ for i in range(bots):
 	cmd="docker run -d --name dockemu-%s -e 'server=%s' dockemu"%(i,server)
 	print cmd
 	try:
-		p = subprocess.Popen(cmd , shell=True)
+		print
+		#p = subprocess.Popen(cmd , shell=True)
 	except:
-		print "CANNOT START dockemu-%s"%i
+		logging.error( "CANNOT START dockemu-%s"%i)
 	time.sleep(delay)
 
 
@@ -76,10 +77,10 @@ if duration != 0:
 		cmd="docker kill dockemu-%s && docker rm dockemu-%s"%(i,i)
 		print cmd
 		try:
-			p = subprocess.Popen(cmd , shell=True)
+			#p = subprocess.Popen(cmd , shell=True)
 			print s
 		except:
-			print "Did not stop the containers stopping all running containers!!"
+			logging.error("Did not stop the containers stopping all running containers!!")
 			cmd="docker stop $(docker ps -a -q) && docker rm $(docker ps -a -q)"
-			p = subprocess.Popen(cmd , shell=True)
+			#p = subprocess.Popen(cmd , shell=True)
 
