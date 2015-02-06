@@ -4,6 +4,10 @@
 
   vars:
     source: recover-to-s3.sh
+  vars_prompt:
+  - name: "bots"
+    prompt: "how many bots do you want?"
+    default: "1"
 
   tasks:
   - command: date
