@@ -6,7 +6,7 @@ ROOT=os.path.dirname(os.path.abspath(__file__))
 
 bots=2
 image="dockemu"
-server="192.168.8.66"
+server="192.168.8.20"
 duration="10"
 delay="5"
 
