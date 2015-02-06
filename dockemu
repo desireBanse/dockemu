@@ -62,7 +62,7 @@ for i in range(bots):
 	print cmd
 	try:
 		print
-		#p = subprocess.Popen(cmd , shell=True)
+		p = subprocess.Popen(cmd , shell=True)
 	except:
 		logging.error( "CANNOT START dockemu-%s"%i)
 	time.sleep(delay)
@@ -71,16 +71,16 @@ for i in range(bots):
 
 if duration != 0:
 	print
-	print "Waiting %ss to stop all docker botnet"%duration
+	print "Waiting %ss to stop the attack (all docker botnet)"%duration
 	time.sleep(duration)
 	for i in range(bots):
 		cmd="docker kill dockemu-%s && docker rm dockemu-%s "%(i,i)
 		print cmd
 		try:
-			#p = subprocess.Popen(cmd , shell=True)
+			p = subprocess.Popen(cmd , shell=True)
 			print s
 		except:
 			logging.error("Did not stop the containers stopping all running containers!!")
 			cmd="docker stop $(docker ps -a -q) && docker rm $(docker ps -a -q)"
-			#p = subprocess.Popen(cmd , shell=True)
+			p = subprocess.Popen(cmd , shell=True)
 
