@@ -60,8 +60,10 @@ names=[]
 for i in range(bots):
 	cmd="docker run -d --name dockemu-%s -e 'server=%s' dockemu"%(i,server)
 	print cmd
-	#cmd="echo %s %s %s %s "%(bots,i, duration , delay)
-	p = subprocess.Popen(cmd , shell=True)
+	try:
+		p = subprocess.Popen(cmd , shell=True)
+	except:
+		print "CANNOT START dockemu-%s"%i
 	time.sleep(delay)
 
 
@@ -73,5 +75,11 @@ if duration != 0:
 	for i in range(bots):
 		cmd="docker kill dockemu-%s"%i
 		print cmd
-		p = subprocess.Popen(cmd , shell=True)
+		try:
+			p = subprocess.Popen(cmd , shell=True)
+			as
+		except:
+			print "Did not stop the containers stopping all running containers!!"
+			cmd="docker stop $(docker ps -a -q) && docker rm $(docker ps -a -q)"
+			p = subprocess.Popen(cmd , shell=True)
 
