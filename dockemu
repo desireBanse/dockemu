@@ -82,7 +82,7 @@ if duration != 0:
 				print s
 			except:
 				failed=True
-				logging.error("failed to stop %s!!"%i)
+				logging.error("failed to stop dockemu-%s!!"%i)
 	except:
 		cmd="docker stop $(docker ps -a -q) && docker rm $(docker ps -a -q)"
 		p = subprocess.Popen(cmd , shell=True)
