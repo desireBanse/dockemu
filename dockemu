@@ -20,7 +20,10 @@ except:
 
 #server to attack
 try:
-	server = raw_input('Enter the IP of the server to attack? [defaults=%s] : '%server)
+	aux = raw_input('Enter the IP of the server to attack? [defaults=%s] : '%server)
+	if aux != "":
+		server=aux
+
 except:
 	print "[WARNING] server not provided, using defaults (%s)"%server
 	print 
