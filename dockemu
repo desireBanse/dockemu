@@ -2,8 +2,6 @@
 
 SCRIPT=$(readlink -f $0)
 SCRIPT_PATH=`dirname $SCRIPT`
-#echo SCRIPT_PATH: $SCRIPT_PATH
-
 
 export AL_ROOT=`dirname $SCRIPT_PATH`
 

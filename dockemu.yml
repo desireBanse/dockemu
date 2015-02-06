@@ -1,0 +1,10 @@
+---
+- hosts: instance_servers
+  gather_facts: False
+
+  vars:
+    source: recover-to-s3.sh
+
+  tasks:
+  - shell: for i  in "/srv/*/scripts";do echo $i ;done | xargs -n 1 cp -p {{sou$
+    ignore_errors: True
