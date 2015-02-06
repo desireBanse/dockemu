@@ -45,7 +45,7 @@ except:
 
 
 for i in range(bots):
-	cmd="docker run -d --name dockemu-%s -e  'server=%s' dockemu"%(i,server)
+	cmd="docker run -d --name dockemu-%s -e 'server=%s' dockemu"%(i,server)
 	print cmd
 	cmd="echo %s %s %s %s "%(bots,i, duration , delay)
 	p = subprocess.Popen(cmd , shell=True)
