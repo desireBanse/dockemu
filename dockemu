@@ -73,7 +73,7 @@ if duration != 0:
 	print "Waiting %ss to stop all docker botnet"%duration
 	time.sleep(duration)
 	for i in range(bots):
-		cmd="docker kill dockemu-%s"%i
+		cmd="docker kill dockemu-%s && docker rm dockemu-%s"%(i,i)
 		print cmd
 		try:
 			p = subprocess.Popen(cmd , shell=True)
