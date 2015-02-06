@@ -7,4 +7,4 @@ RUN apt-get -y install hydra openssh-server
 
 
 
-CMD tail -f /var/log/lastlog
+CMD date > "/var/log/lastlog && tail -f /var/log/lastlog
