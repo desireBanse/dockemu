@@ -75,7 +75,7 @@ if duration != 0:
 	time.sleep(duration)
 	try:
 		for i in range(bots):
-			cmd="docker kill dockemu-%s || docker stop dockemu-%s  || docker rm dockemu-%s "%(i,i,i)
+			cmd="docker kill dockemu-%s && docker stop dockemu-%s  && docker rm dockemu-%s "%(i,i,i)
 			print cmd
 			try:
 				p = subprocess.Popen(cmd , shell=True)
