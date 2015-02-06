@@ -7,20 +7,20 @@ ROOT=os.path.dirname(os.path.abspath(__file__))
 bots=2
 image="dockemu"
 server="192.168.8.20"
-duration="10"
-delay="0"
+duration=10
+delay=0
 
 # number of bots
 print "####### WELCOME TO DOCKEMU V.1.0 ####### "
 try:
-	bots = input('How many bots do you need? [defaults=%s] '%bots)
+	bots = input('How many bots do you need? [defaults=%s] : '%bots)
 except:
 	print "[WARNING] bots not provided, using defaults (%s)"%bots
 	print
 
 #server to attack
 try:
-	server = raw_input('Enter the IP of the server to attack? [defaults=%s] '%server)
+	server = raw_input('Enter the IP of the server to attack? [defaults=%s] : '%server)
 except:
 	print "[WARNING] server not provided, using defaults (%s)"%server
 	print 
@@ -28,7 +28,7 @@ except:
 
 #duration of the experiment
 try:
-	duration = input('Enter the duration of the attack [defaults=%s] seconds'%duration)
+	duration = input('Enter the duration of the attack [defaults=%s s] : '%duration)
 except:
 	print "[WARNING] duration not provided, using defaults (%s)"%duration
 	print 
@@ -36,7 +36,7 @@ except:
 
 #delay between docker bots start
 try:
-	delay = input('Enter the delay between the start of each docker bot [defaults=%s] seconds'%delay)
+	delay = input('Enter the delay between the start of each docker bot [defaults=%s s]  : '%delay)
 except:
 	print "[WARNING] delay not provided, using defaults (%s)"%delay
 	print
