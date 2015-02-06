@@ -16,7 +16,7 @@
   - debug: msg=" STARTING  {{number_of_bots}}  BOTS"
 
   - name: RUN DOCKER BOT-NET 
-    docker: image=dockemu   count={{number_of_bots}}
+    docker: image=dockemu   count={{number_of_bots}} privileged=yes
 
   - name: Display IP address and port mappings for containers
     debug: msg="{{inventory_hostname}}:{{docker_containers[{{item}}]['HostConfig']['PortBindings']['8080/tcp'][0]['HostPort']}}"
