@@ -3,9 +3,8 @@
 SCRIPT=$(readlink -f $0)
 SCRIPT_PATH=`dirname $SCRIPT`
 
-export AL_ROOT=`dirname $SCRIPT_PATH`
+#export AL_ROOT=`dirname $SCRIPT_PATH`
+#echo $AL_ROOT $SCRIPT $SCRIPT_PATH
 
-echo $AL_ROOT $SCRIPT $SCRIPT_PATH
 
-
-#ansible-playbook 
+ansible-playbook 
