@@ -58,7 +58,7 @@ except:
 print "STARTING DOCKEMU BOT-NET ...."
 names=[]
 for i in range(bots):
-	cmd="docker run -d --name dockemu-%s -e 'server=%s' dockemu 2>/dev/null"%(i,server)
+	cmd="docker run -d --name dockemu-%s -e 'server=%s' dockemu &>/dev/null"%(i,server)
 	print cmd
 	try:
 		print
@@ -74,7 +74,7 @@ if duration != 0:
 	print "Waiting %ss to stop the attack (all docker botnet)"%duration
 	time.sleep(duration)
 	for i in range(bots):
-		cmd="docker kill dockemu-%s && docker rm dockemu-%s "%(i,i)
+		cmd="docker kill dockemu-%s && docker stop dockemu-%s  && docker rm dockemu-%s "%(i,i)
 		print cmd
 		try:
 			p = subprocess.Popen(cmd , shell=True)
