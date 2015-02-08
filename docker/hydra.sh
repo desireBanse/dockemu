@@ -2,7 +2,7 @@
 
 
 
-trap 'echo 'ATTEMPTS:' $( grep ATTEMPT ${name}.log |wc -l) |tee -a $log_file ; echo "[ENDING  $(date +%D-%T) ]" | tee -a $log_file; exit 0; ' SIGINT SIGTERM
+trap 'echo 'ATTEMPTS:' $( grep ATTEMPT ${name}.log |wc -l) |tee -a $log_file ; echo "[ENDING  $(date +%D-%T) ]" | tee -a $log_file; exit 0; ' SIGINT SIGTERM SIGKILL
 
 #rm *.restore 2>/dev/null
 
