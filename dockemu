@@ -73,7 +73,7 @@ except:
 print "STARTING DOCKEMU BOT-NET ...."
 names=[]
 for i in range(bots):
-	cmd="docker run -d --name -v %s/log/:/var/log/dockemu/ dockemu-%s -e 'server=%s' dockemu dockemu-%s &>/dev/null"%(ROOT,i,server)
+	cmd="docker run -d --name -v %s/log/:/var/log/dockemu/ dockemu-%s -e 'server=%s' dockemu dockemu-%s &>/dev/null"%(ROOT,i,server,i)
 	print cmd
 	try:
 		print
