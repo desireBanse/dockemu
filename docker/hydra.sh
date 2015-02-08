@@ -7,8 +7,9 @@ log_file=${log_dir}/${log_file}.log
 
 echo "LOGFILE:" $log_file
 
-echo "[STARTING  $(date +%D-%T) ]" | tee -a $log_file
+echo "[STARTING BOT: $log_file $(date +%D-%T) ]" | tee -a $log_file
 
+sleep 1
 
 hydra -L /passwords -V -P /passwords -t 64 $server ssh | tee -a $log_file
 
