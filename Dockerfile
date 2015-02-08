@@ -10,6 +10,8 @@ RUN mkdir /var/log/dockemu
 
 
 ADD docker/passwords /
+ADD docker/users /
+
 ADD docker/hydra.sh /
 RUN chmod +x /hydra.sh
 

