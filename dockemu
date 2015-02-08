@@ -50,7 +50,7 @@ except:
 
 #duration of the experiment
 try:
-	duration = input('Enter the duration of the attack [defaults=%s s], -1 = forever:  '%duration)
+	duration = input('Enter the duration of the attack [defaults=%s s], -1=forever:  '%duration)
 	print
 except KeyboardInterrupt:
 	sys.exit(0)
