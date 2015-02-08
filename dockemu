@@ -9,7 +9,7 @@ ROOT=os.path.dirname(os.path.abspath(__file__))
 bots=2
 image="dockemu"
 server="192.168.8.20"
-duration=10
+duration=60
 delay=0
 
 #intro banner
@@ -50,7 +50,7 @@ except:
 
 #duration of the experiment
 try:
-	duration = input('Enter the duration of the attack [defaults=%s s]: '%duration)
+	duration = input('Enter the duration of the attack [defaults=%s s], -1 = forever:  '%duration)
 	print
 except KeyboardInterrupt:
 	sys.exit(0)
@@ -84,7 +84,7 @@ for i in range(bots):
 
 
 failed=False
-if duration != 0:
+if duration > 0:
 	print
 	print "Waiting %ss to stop the attack (all docker botnet)"%duration
 	time.sleep(duration)

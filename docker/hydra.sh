@@ -4,7 +4,7 @@
 
 trap 'ls $name ; echo "[ENDING  $(date +%D-%T) ]" | tee -a $log_file; exit 0; ' SIGINT SIGTERM
 
-rm *.restore
+rm *.restore 2>/dev/null
 
 log_dir="/var/log/dockemu"
 log_file=${1:-"$RANDOM"}
