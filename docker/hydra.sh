@@ -2,7 +2,9 @@
 
 
 
-trap 'echo "ATTEMPTS: $(cat $name |grep ATTEMPT |wc -l) ; echo "[ENDING  $(date +%D-%T) ]" | tee -a $log_file; exit 0; ' SIGINT SIGTERM
+trap 'ls $name ; echo "[ENDING  $(date +%D-%T) ]" | tee -a $log_file; exit 0; ' SIGINT SIGTERM
+
+rm *.restore
 
 log_dir="/var/log/dockemu"
 log_file=${1:-"$RANDOM"}
