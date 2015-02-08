@@ -2,8 +2,8 @@
 
 log_dir="/var/log/dockemu"
 
-log_file=${1:-"${RANDOM}.log"}
-log_file=${log_dir}/${log_file}
+log_file=${1:-"${RANDOM}"}
+log_file=${log_dir}/${log_file}.log
 
 echo "LOGFILE:" $log_file
 
