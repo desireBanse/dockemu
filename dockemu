@@ -12,6 +12,9 @@ server="192.168.8.66"
 duration=60
 delay=0
 
+#clear screen
+os.system(['clear','cls'][os.name =='nt'])
+
 #intro banner
 print "##############################################"
 print "##############################################"
@@ -28,7 +31,7 @@ print "##############################################"
 print ""
 print ""
 try:
-	bots = input('How many bots do you need? [defaults=%s]: '%bots)
+	bots = input('How many bots do you need for the attack? [defaults=%s]: '%bots)
 	print
 except KeyboardInterrupt:
 	sys.exit(0)
@@ -69,6 +72,9 @@ except:
 	logging.warning( "delay not provided, using defaults (%s)"%delay)
 	print
 
+
+print "##############################################"
+print "##############################################"
 
 print "STARTING DOCKEMU BOT-NET ...."
 names=[]

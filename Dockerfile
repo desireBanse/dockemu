@@ -7,8 +7,6 @@ RUN apt-get -y install hydra openssh-server nano
 
 RUN mkdir /var/log/dockemu
 
-
-
 ADD docker/passwords /
 ADD docker/users /
 
