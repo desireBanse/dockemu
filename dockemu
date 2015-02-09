@@ -7,7 +7,7 @@ ROOT=os.path.dirname(os.path.abspath(__file__))
 main_log="log/dockemu.log"
 #defaults:
 bots=2
-image="dockemu"
+image="dockemu/hydra:hydrabot"
 server="192.168.8.66"
 duration=20
 delay=0
@@ -77,7 +77,7 @@ print "STARTING DOCKEMU BOT-NET ...."
 names=[]
 for i in range(bots):
 	logging.info("STARTING dockemu-%s"%i)
-	cmd="docker run -d -v %s/log/:/var/log/dockemu/ --name  dockemu-%s -e 'server=%s' dockemu/hydra:hydrabot dockemu-%s &>/dev/null"%(ROOT,i,server,i)
+	cmd="docker run -d -v %s/log/:/var/log/dockemu/ --name  dockemu-%s -e 'server=%s' %s dockemu-%s &>/dev/null"%(ROOT,i,server,image,i)
 	print cmd
 	try:
 		print
