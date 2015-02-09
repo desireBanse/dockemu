@@ -84,12 +84,12 @@ for i in range(bots):
 		print
 		try:
 			p = subprocess.Popen(cmd , shell=True)
+			time.sleep(1)
 		except:
 			print "CANNOT START dockemu-%s"%i
-		#time.sleep(1)
+		
 		#grep="docker inspect dockemu-%s | grep IPAddress"%i
 		output = subprocess.check_output("docker inspect dockemu-%s"%i, shell=True)
-		#o=output.rstrip().split('\n')
 		for IP in output.splitlines():
 			if "IPAddress" in IP:
 				print IP
