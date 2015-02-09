@@ -6,7 +6,8 @@ import traceback
 ROOT=os.path.dirname(os.path.abspath(__file__))
 
 print ROOT
-main_log=ROOT+"log/dockemu.log"
+exit 
+main_log=ROOT+"/log/dockemu.log"
 #defaults:
 bots=2
 image="dockemu/hydra:hydrabot"
