@@ -88,6 +88,12 @@ for i in range(bots):
 			print "CANNOT START dockemu-%s"%i
 		#time.sleep(1)
 		#grep="docker inspect dockemu-%s | grep IPAddress"%i
+		output = subprocess.check_output("docker inspect dockemu-%s"%i, shell=True)
+		#o=output.rstrip().split('\n')
+		for IP in output.splitlines():
+    		if "IPAddress" in IP:         
+    	    	print IP
+    	    	logging.info("dockemu-"+str(i)+IP)
 		#p= subprocess.check_output(grep,shell=True ,stderr=subprocess.STDOUT)
 		#print p
 		#logging.info("dockemu-"+str(i)+p)
