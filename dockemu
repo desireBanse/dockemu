@@ -81,16 +81,15 @@ for i in range(bots):
 	
 	time.sleep(1)
 	#grep="docker inspect dockemu | grep IPAddress "
-	grep="docker inspect dockemu-%s | grep IPAddress"%i
-	p= subprocess.check_output(grep,shell=True ,stderr=subprocess.STDOUT)
-	print p
 	#logging.info("dockemu-"+str(i)+p)
 	#p = subprocess.check_output('echo to stdout; echo to stderr 1>&2; exit 1',shell=True,stderr=subprocess.STDOUT,)
-
 	print cmd
 	try:
 		print
 		p = subprocess.Popen(cmd , shell=True)
+		grep="docker inspect dockemu-%s | grep IPAddress"%i
+		p= subprocess.check_output(grep,shell=True ,stderr=subprocess.STDOUT)
+		print p
 	except:
 		print "CANNOT START dockemu-%s"%i
 	time.sleep(delay)
