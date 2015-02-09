@@ -78,19 +78,16 @@ names=[]
 for i in range(bots):
 	logging.info("STARTING dockemu-%s"%i)
 	cmd="docker run -d -v %s/log/:/var/log/dockemu/ --name  dockemu-%s -e 'server=%s' dockemu dockemu-%s &>/dev/null"%(ROOT,i,server,i)
-	
-	time.sleep(1)
-	#grep="docker inspect dockemu | grep IPAddress "
-	#logging.info("dockemu-"+str(i)+p)
-	#p = subprocess.check_output('echo to stdout; echo to stderr 1>&2; exit 1',shell=True,stderr=subprocess.STDOUT,)
 	print cmd
 	try:
 		print
 		p = subprocess.Popen(cmd , shell=True)
-		time.sleep(1)
+		#time.sleep(1)
 		grep="docker inspect dockemu-%s | grep IPAddress"%i
 		p= subprocess.check_output(grep,shell=True ,stderr=subprocess.STDOUT)
-		print p
+		#print p
+		logging.info("dockemu-"+str(i)+p)
+
 	except:
 		print "CANNOT START dockemu-%s"%i
 	time.sleep(delay)
