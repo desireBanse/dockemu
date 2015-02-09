@@ -87,10 +87,10 @@ for i in range(bots):
 		except:
 			print "CANNOT START dockemu-%s"%i
 		#time.sleep(1)
-		grep="docker inspect dockemu-%s | grep IPAddress"%i
-		p= subprocess.check_output(grep,shell=True ,stderr=subprocess.STDOUT)
-		print p
-		logging.info("dockemu-"+str(i)+p)
+		#grep="docker inspect dockemu-%s | grep IPAddress"%i
+		#p= subprocess.check_output(grep,shell=True ,stderr=subprocess.STDOUT)
+		#print p
+		#logging.info("dockemu-"+str(i)+p)
 
 	except:
 		print traceback.format_exc()
