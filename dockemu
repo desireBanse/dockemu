@@ -5,7 +5,7 @@ import traceback
 
 ROOT=os.path.dirname(os.path.abspath(__file__))
 
-main_log="log/dockemu.log"
+main_log=ROOT+"log/dockemu.log"
 #defaults:
 bots=2
 image="dockemu/hydra:hydrabot"
@@ -88,15 +88,12 @@ for i in range(bots):
 		except:
 			print "CANNOT START dockemu-%s"%i
 		
-		#grep="docker inspect dockemu-%s | grep IPAddress"%i
 		output = subprocess.check_output("docker inspect dockemu-%s"%i, shell=True)
 		for IP in output.splitlines():
 			if "IPAddress" in IP:
 				print IP
 				logging.info("dockemu-"+str(i)+IP)
-		#p= subprocess.check_output(grep,shell=True ,stderr=subprocess.STDOUT)
-		#print p
-		#logging.info("dockemu-"+str(i)+p)
+		
 
 	except:
 		print traceback.format_exc()
