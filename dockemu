@@ -9,7 +9,7 @@ main_log="log/dockemu.log"
 bots=2
 image="dockemu"
 server="192.168.8.66"
-duration=60
+duration=20
 delay=0
 
 logging.basicConfig(filename=main_log,level=logging.DEBUG,  format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
@@ -85,7 +85,7 @@ for i in range(bots):
 		#time.sleep(1)
 		grep="docker inspect dockemu-%s | grep IPAddress"%i
 		p= subprocess.check_output(grep,shell=True ,stderr=subprocess.STDOUT)
-		#print p
+		print p
 		logging.info("dockemu-"+str(i)+p)
 
 	except:
