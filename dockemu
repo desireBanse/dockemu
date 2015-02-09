@@ -12,7 +12,7 @@ server="192.168.8.66"
 duration=60
 delay=0
 
-logging.basicConfig(filename='log/dockemu.log',level=logging.DEBUG)
+logging.basicConfig(filename='log/dockemu.log',level=logging.DEBUG,  format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
 
 
 #intro banner
@@ -76,7 +76,7 @@ except:
 print "STARTING DOCKEMU BOT-NET ...."
 names=[]
 for i in range(bots):
-	logging.warning("STARTING dockemu-%s"%i)
+	logging.info("STARTING dockemu-%s"%i)
 	cmd="docker run -d -v %s/log/:/var/log/dockemu/ --name  dockemu-%s -e 'server=%s' dockemu dockemu-%s &>/dev/null"%(ROOT,i,server,i)
 	print cmd
 	try:
