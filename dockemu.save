@@ -4,6 +4,7 @@ import sys, os, time
 
 ROOT=os.path.dirname(os.path.abspath(__file__))
 
+
 #defaults:
 bots=2
 image="dockemu"
@@ -77,14 +78,12 @@ print "##############################################"
 
 print "STARTING DOCKEMU BOT-NET ...."
 names=[]
-logging.basicConfig(filename='/usr/local/dockemu_master/log/bots.log',
-		    level=logging.DEBUG,
-		    format='%(asctime)s %(message)s',
-                    datefmt='%m/%d/%Y %I:%M:%S %p')
-
+logging.basicConfig(filename='/usr/local/dockemu_master/log/bots.log',level=logging.DEBUG)
+logging.basicConfig(format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
 logging.debug('Start Logging')
 for i in range(bots):
 	logging.debug('Starting dockemu-%s'%i)
+	#logging.info('Starting dockemu-%s'%i)
 	cmd="docker run -d -v %s/log/:/var/log/dockemu/ --name  dockemu-%s -e 'server=%s' dockemu dockemu-%s &>/dev/null"%(ROOT,i,server,i)
 	print cmd
 	try:
@@ -102,8 +101,8 @@ if duration > 0:
 	try:
 		for i in range(bots):
 			cmd="docker kill dockemu-%s && docker stop dockemu-%s  && docker rm dockemu-%s "%(i,i,i)
-			logging.debug('Finishing dockemu-%s'%i)
-			print cmd
+				logging.debug('Finishing dockemu-%s'%i)
+		print cmd
 			try:
 				p = subprocess.Popen(cmd , shell=True)
 				print s
