@@ -81,8 +81,8 @@ for i in range(bots):
 	
 
 	grep="docker inspect dockemu | grep IPAddress "
-	p= subprocess.check_output(grep,shell=True ,   stderr=subprocess.STDOUT )
-	logging.info("dockemu"+str(i)+p)
+	p=subprocess.check_output(grep,shell=True ,   stderr=subprocess.STDOUT )
+	logging.info("dockemu-"+str(i)+p)
 	#p = subprocess.check_output('echo to stdout; echo to stderr 1>&2; exit 1',shell=True,stderr=subprocess.STDOUT,)
 
 	print cmd
