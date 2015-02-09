@@ -1,3 +1,3 @@
 #!/bin/bash
 
-docker build  --force-rm -t dockemu:latest .
+docker build  --force-rm -t dockemu/hydra:hydrabot .

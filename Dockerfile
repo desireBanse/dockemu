@@ -1,17 +1,7 @@
-FROM ubuntu:14.04
+FROM dockemu/hydra:hydrabot
 
-MAINTAINER marcos cano marcos.cano@galileo.edu
-
-RUN apt-get update
-RUN apt-get -y install hydra openssh-server nano 
-
-RUN mkdir /var/log/dockemu
-
-ADD docker/passwords /
-ADD docker/users /
-
-ADD docker/hydra.sh /
-RUN chmod +x /hydra.sh
+MAINTAINER marcos cano / oscar rodas {orodas,marcos.cano}@galieo.edu
 
 ENV server 192.168.8.66
-ENTRYPOINT ["/hydra.sh"] 
+CMD hydra -L passwords -V -P passwords -t 4 $server ssh
+
