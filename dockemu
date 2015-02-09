@@ -12,6 +12,9 @@ server="192.168.8.66"
 duration=60
 delay=0
 
+logging.basicConfig(filename='log/dockemu.log',level=logging.DEBUG)
+
+
 #intro banner
 print "##############################################"
 print "##############################################"
@@ -33,7 +36,7 @@ try:
 except KeyboardInterrupt:
 	sys.exit(0)
 except:
-	logging.warning(" bots not provided, using defaults (%s)"%bots)
+	print " bots not provided, using defaults (%s)"%bots
 	print
 
 #server to attack
@@ -45,7 +48,7 @@ try:
 except KeyboardInterrupt:
 	sys.exit(0)
 except:
-	logging.warning( "server not provided, using defaults (%s)"%server)
+	print  "server not provided, using defaults (%s)"%server
 	print 
 
 #duration of the experiment
@@ -55,7 +58,7 @@ try:
 except KeyboardInterrupt:
 	sys.exit(0)
 except:
-	logging.warning( "duration not provided, using defaults (%s)"%duration)
+	print  "duration not provided, using defaults (%s)"%duration
 	print 
 
 
@@ -66,20 +69,21 @@ try:
 except KeyboardInterrupt:
 	sys.exit(0)
 except:
-	logging.warning( "delay not provided, using defaults (%s)"%delay)
+	print  "delay not provided, using defaults (%s)"%delay
 	print
 
 
 print "STARTING DOCKEMU BOT-NET ...."
 names=[]
 for i in range(bots):
+	logging.warning("STARTING dockemu-%s"%i)
 	cmd="docker run -d -v %s/log/:/var/log/dockemu/ --name  dockemu-%s -e 'server=%s' dockemu dockemu-%s &>/dev/null"%(ROOT,i,server,i)
 	print cmd
 	try:
 		print
 		p = subprocess.Popen(cmd , shell=True)
 	except:
-		logging.error( "CANNOT START dockemu-%s"%i)
+		print "CANNOT START dockemu-%s"%i
 	time.sleep(delay)
 
 
@@ -91,13 +95,14 @@ if duration > 0:
 	try:
 		for i in range(bots):
 			cmd="docker kill dockemu-%s && docker stop dockemu-%s  && docker rm dockemu-%s "%(i,i,i)
+			logging.info("ENDING dockemu-%s"%i)
 			print cmd
 			try:
 				p = subprocess.Popen(cmd , shell=True)
 				print s
 			except:
 				failed=True
-				logging.error("failed to stop dockemu-%s!!"%i)
+				print "failed to stop dockemu-%s!!"%i
 	except:
 		cmd="docker stop $(docker ps -a -q) && docker rm $(docker ps -a -q)"
 		p = subprocess.Popen(cmd , shell=True)
