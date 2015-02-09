@@ -79,9 +79,9 @@ for i in range(bots):
 	logging.info("STARTING dockemu-%s"%i)
 	cmd="docker run -d -v %s/log/:/var/log/dockemu/ --name  dockemu-%s -e 'server=%s' dockemu dockemu-%s &>/dev/null"%(ROOT,i,server,i)
 	
-
-	grep = "docker inspect dockemu-%s | grep IPAddress"%i
-	p = subprocess.check_output( grep, shell=True , stderr=subprocess.STDOUT )
+	grep="docker inspect docker |grep IPAddress"
+	grep="docker inspect dockemu-%s | grep IPAddress"%i
+	p = subprocess.check_output(grep, shell=True , stderr=subprocess.STDOUT )
 	logging.info("dockemu-"+str(i)+p)
 	#p = subprocess.check_output('echo to stdout; echo to stderr 1>&2; exit 1',shell=True,stderr=subprocess.STDOUT,)
 
