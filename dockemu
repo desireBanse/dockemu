@@ -81,7 +81,6 @@ print "##############################################"
 
 print "STARTING DOCKEMU BOT-NET ...."
 names=[]
-<<<<<<< HEAD
 logging.basicConfig(filename='/usr/local/dockemu_2/log/bots.log',
 		    level=logging.DEBUG,
 		    format='%(asctime)s %(message)s',
