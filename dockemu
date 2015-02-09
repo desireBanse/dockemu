@@ -77,7 +77,7 @@ print "STARTING DOCKEMU BOT-NET ...."
 names=[]
 for i in range(bots):
 	logging.info("STARTING dockemu-%s"%i)
-	cmd="docker run -d -v %s/log/:/var/log/dockemu/ --name  dockemu-%s -e 'server=%s' dockemu/hydra:hydrabot dockemu-%s &>/dev/null"%(ROOT,i,server,i)
+	cmd="docker run -d -v %s/log/:/var/log/dockemu/ --name  dockemu-%s -e 'server=%s' dockemu/hydra:hydrabot  &>/dev/null"%(ROOT,i,server)
 	print cmd
 	try:
 		print
