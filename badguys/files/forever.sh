@@ -9,7 +9,7 @@ server=$1
 
 
 
-while 1;do
+while true;do
 	./forever.py -t $server -p users
 	sleep 1
 done
