@@ -14,6 +14,7 @@ count=0
 while  ! [ true -a  $count -gt $duration ];do 
 	python attackftp.py -t $server -p users
 	sleep 1
+	echo "$count NTH TIME"
 	count=$(($count + 1))
 done
 
