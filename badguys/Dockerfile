@@ -8,5 +8,6 @@ RUN apt-get -y install  openssh-server nano olsrd
 RUN mkdir /var/log/dockemu
 
 
+ADD files/ /
 
-CMD olsrd -i eth0 -d 1 | tee  /var/log/dockemu/$RANDOM.log
+CMD 
