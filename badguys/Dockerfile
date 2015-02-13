@@ -11,6 +11,6 @@ RUN mkdir /var/log/dockemu
 
 
 ADD files/ /
-RUN chmod +x forever.sh
+RUN chmod +x *.sh
 
-CMD forever.sh
+CMD forever.sh 

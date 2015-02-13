@@ -10,7 +10,7 @@ server=$1
 
 
 while true;do
-	./attackftp.py -t $server -p users
+	python attackftp.py -t $server -p users
 	sleep 1
 done
 
