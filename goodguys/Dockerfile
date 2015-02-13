@@ -13,4 +13,4 @@ ADD java/ /
 
 ADD supervisord.conf /tmp/supervisord.conf
 
-CMD olsrd -i eth0 -d 1 | tee  /var/log/dockemu/$RANDOM.log
+CMD supervisord
