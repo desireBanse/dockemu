@@ -4,10 +4,10 @@ FROM dockerfile/supervisor
 MAINTAINER marcos cano marcos.cano@galileo.edu
 
 RUN apt-get update
-RUN apt-get -y install  vsftpd  olsrd 
+RUN apt-get -y install  proftpd  olsrd 
 
 RUN mkdir /var/log/dockemu
-
+RUN echo "DefaultRoot   ~" >> /etc/proftpd/proftpd.conf
 
 ADD supervisord_ftp.conf /tmp/supervisord.conf
 CMD supervisor -c /tmp/supervisord.conf
