@@ -13,4 +13,4 @@ ADD java/ /
 
 ADD supervisord.conf /tmp/supervisord.conf
 
-CMD supervisord
+CMD supervisord -c /tmp/supervisord.conf
