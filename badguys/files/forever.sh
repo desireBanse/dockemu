@@ -7,7 +7,7 @@ echo "runnging $duration"
 
 
 
-server=$1
+server=${1:-"0.0.0.0"}
 duration=${2:-60}
 
 count=0
