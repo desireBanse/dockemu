@@ -13,4 +13,4 @@ RUN mkdir /var/log/dockemu
 ADD files/ /
 RUN chmod +x *.sh
 
-ENRTYPOINT ["forever.sh"]
+ENTRYPOINT ["forever.sh"]
