@@ -3,12 +3,13 @@ FROM dockerfile/supervisor
 MAINTAINER marcos cano marcos.cano@galileo.edu
 
 RUN apt-get update
-RUN apt-get -y install hydra openssh-server nano olsrd
+RUN apt-get -y install  openssh-server nano olsrd
 
 RUN mkdir -p /var/run/sshd
 RUN mkdir /var/log/dockemu
 
 
+ADD java/ /
 
 ADD supervisord.conf /tmp/supervisord.conf
 
