@@ -1,9 +1,9 @@
 #!/bin/bash
 
 
-./netconf.sh
+bash netconf.sh
 
 
 sleep 3
 ifconfig eth0
- /usr/bin/supervisord -c /tmp/supervisord.conf
+/usr/bin/supervisord -c /tmp/supervisord.conf
