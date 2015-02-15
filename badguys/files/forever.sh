@@ -3,12 +3,13 @@
 #give the duration of the attack per bot
 #duration=${1:-"9999999999"}
 
+duration=${2:-60}
+
 echo "running $duration"
 
 
 
 server=${1:-$attack_servers}
-duration=${2:-60}
 
 count=0
 while  ! [ true -a  $count -gt $duration ];do 

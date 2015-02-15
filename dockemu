@@ -107,6 +107,7 @@ time.sleep(2)
 
 print ftpserver_list
 print ftpserver_ips
+sys.exit(0)
 
 if bots > 253:
 	print "bots can not be > 253"
