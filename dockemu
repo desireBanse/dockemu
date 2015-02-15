@@ -113,7 +113,7 @@ if bots > 253:
 	sys.exit(0)
 
 for i in range(bots):
-	cmd="docker run -d -v %s/log/:/var/log/dockemu/ --name  dockemu-%s %s ./attackftp %s &>/dev/null"%(ROOT,i,imagebot,ftpserver_ips)
+	cmd="docker run -d -v %s/log/:/var/log/dockemu/ --name  dockemu-%s %s ./attackftp '%s' &>/dev/null"%(ROOT,i,imagebot,ftpserver_ips)
 	print cmd
 	sys.exit(0)
 	try:
