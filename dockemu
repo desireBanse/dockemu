@@ -81,7 +81,6 @@ for i in range(ftpservers):
 	
 	cmd="docker run -e 'ipaddress=172.17.%s.5' -d -v %s/log/:/var/log/dockemu/ --name dockemu-ftpserver-%s --privileged %s &>/dev/null"%(i,ROOT,i,imagegg)
 	print cmd
-	sys.exit(0)
 	try:
 		print
 		try:
