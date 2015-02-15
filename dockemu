@@ -6,7 +6,7 @@ import traceback
 ROOT=os.path.dirname(os.path.abspath(__file__))
 
 print ROOT
-exit 
+ 
 main_log=ROOT+"/log/dockemu.log"
 #defaults:
 bots=2
@@ -38,6 +38,8 @@ print "###  BRUTE FORCE ATTACK TO MESH NEWTORKS #####"
 print "##############################################"
 print ""
 print ""
+sys.exit(0)
+
 try:
 	bots = input('How many bots do you need? [defaults=%s]: '%bots)
 	print
