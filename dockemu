@@ -113,7 +113,7 @@ if bots > 253:
 	sys.exit(0)
 
 for i in range(bots):
-	cmd="docker run -d -v %s/log/:/var/log/dockemu/ --name  dockemu-%s %s  '%s' &>/dev/null"%(ROOT,i,imagebot,ftpserver_ips)
+	cmd="docker run -d -v %s/log/:/var/log/dockemu/ --name  dockemu-botnet-%s %s  '%s' &>/dev/null"%(ROOT,i,imagebot,ftpserver_ips)
 	print cmd
 	try:
 		print
@@ -145,19 +145,19 @@ if duration > 0:
 	time.sleep(duration)
 	
 	try:
-                for i in range(ftpservers):
-                        cmd="docker kill dockemu-ftpserver-%s && docker stop dockemu-ftpserver-%s  && docker rm dockemu-ftpserver-%s "%(i,i,i)
-                        logging.info("ENDING dockemu-ftpserver-%s"%i)
-                        print cmd
-                        try:
-                                p = subprocess.Popen(cmd , shell=True)
-                                print s
-                        except:
-                                failed=True
-                                print "failed to stop dockemu-ftpserver-%s!!"%i
-        except:
-                cmd="docker stop $(docker ps -a -q) && docker rm $(docker ps -a -q)"
-                p = subprocess.Popen(cmd , shell=True)
+		for i in range(ftpservers):
+			cmd="docker kill dockemu-ftpserver-%s && docker stop dockemu-ftpserver-%s  && docker rm dockemu-ftpserver-%s "%(i,i,i)
+			logging.info("ENDING dockemu-ftpserver-%s"%i)
+			print cmd
+			try:
+				p = subprocess.Popen(cmd , shell=True)
+				print s
+			except:
+				failed=True
+				print "failed to stop dockemu-ftpserver-%s!!"%i
+	except:
+		cmd="docker stop $(docker ps -a -q) && docker rm $(docker ps -a -q)"
+		p = subprocess.Popen(cmd , shell=True)
 	
 
 	try:
