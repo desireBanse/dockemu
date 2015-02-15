@@ -90,7 +90,7 @@ for i in range(ftpservers):
 	try:
 		print
 		try:
-			p = subprocess.Popen(cmd , shell=True)
+			#p = subprocess.Popen(cmd , shell=True)
 			logging.info("STARTING dockemu-ftpserver-%s with IPAddress 172.17.%s.5"%(i,i))
 			ftpserver_list=ftpserver_list+["dockemu-ftpserver-%s"%i]
 			ftpserver_ips=ftpserver_ips+"  172.17.%s.5"%i
