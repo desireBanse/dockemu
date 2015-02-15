@@ -105,8 +105,8 @@ failed=False
 
 time.sleep(2)
 
-print ftpserver_list
-print ftpserver_ips
+# print ftpserver_list
+# print ftpserver_ips
 
 if bots > 253:
 	print "bots can not be > 253"
