@@ -15,7 +15,7 @@ ADD ignite.sh /
 RUN chmod +x *.sh
 ADD supervisord_ftp.conf /tmp/supervisord.conf
 
-ENV ipadress 172.17.5.100
+ENV ipaddress 172.17.5.100
 
 CMD /ignite.sh
 
