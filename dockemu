@@ -81,7 +81,7 @@ if ftpservers > 253:
 	sys.exit(0)
 
 ftpserver_list=[]
-ftpserver_ips=[]
+ftpserver_ips=""
 #Starting servers
 for i in range(ftpservers):
 	
@@ -93,7 +93,7 @@ for i in range(ftpservers):
 			p = subprocess.Popen(cmd , shell=True)
 			logging.info("STARTING dockemu-ftpserver-%s with IPAddress 172.17.%s.5"%(i,i))
 			ftpserver_list=ftpserver_list+["dockemu-ftpserver-%s"%i]
-			ftpserver_ips=ftpserver_ips+["172.17.%s.5"%i]
+			ftpserver_ips=ftpserver_ips+"  172.17.%s.5"%i
 			time.sleep(1)
 		except:
 			print "CANNOT START dockemu-ftpserver-%s"%i
