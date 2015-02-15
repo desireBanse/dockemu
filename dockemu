@@ -76,6 +76,7 @@ if ftpservers > 253:
 	print "ftpservers can not be > 253"
 	sys.exit(0)
 
+ftpserver_list=[]
 #Starting servers
 for i in range(ftpservers):
 	
@@ -86,6 +87,7 @@ for i in range(ftpservers):
 		try:
 			p = subprocess.Popen(cmd , shell=True)
 			logging.info("STARTING dockemu-ftpserver-%s with IPAddress 172.17.%s.5"%(i,i))
+			ftpserver_list=ftpserver_list+["dockemu-ftpserver-%s"%i]
 			time.sleep(1)
 		except:
 			print "CANNOT START dockemu-ftpserver-%s"%i
@@ -97,7 +99,7 @@ failed=False
 
 time.sleep(2)
 
-
+print ftpserver_list
 sys.exit(0)
 
 if bots > 253:
