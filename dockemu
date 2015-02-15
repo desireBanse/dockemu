@@ -97,7 +97,14 @@ for i in range(ftpservers):
 failed=False
 
 time.sleep(2)
+
+
 sys.exit(0)
+
+if bots > 253:
+	print "bots can not be > 253"
+	sys.exit(0)
+
 for i in range(bots):
 	cmd="docker run -d -v %s/log/:/var/log/dockemu/ --name  dockemu-%s %s ./attackftp -t %s -p users &>/dev/null"%(ROOT,i,imagebot,server)
 	print cmd
