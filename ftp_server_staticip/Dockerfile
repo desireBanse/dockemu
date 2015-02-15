@@ -5,7 +5,6 @@ MAINTAINER Oscar Rodas orodas@galileo.edu, marcos cano marcos.cano@galileo.edu
 RUN apt-get update
 RUN apt-get install -y proftpd nano olsrd supervisor iptables  openjdk-7-jre
 RUN mkdir -p /var/run/sshd
-RUN mkdir /var/log/dockemu
 
 
 RUN mkdir /var/log/dockemu
