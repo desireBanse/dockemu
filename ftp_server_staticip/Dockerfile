@@ -3,7 +3,7 @@ FROM dockerfile/supervisor
 MAINTAINER Oscar Rodas orodas@galileo.edu, marcos cano marcos.cano@galileo.edu
 
 RUN apt-get update
-RUN apt-get install -y proftpd nano olsrd supervisor iptables  openjdk-7-jre lynx
+RUN apt-get install -y proftpd nano olsrd supervisor iptables  openjdk-7-jre 
 RUN mkdir -p /var/run/sshd
 
 
@@ -14,7 +14,9 @@ RUN echo "DefaultRoot   ~" >> /etc/proftpd/proftpd.conf
 ADD netconf.sh /
 ADD ignite.sh /
 
-RUN chmod +x *.sh
+RUN chmod +x ignite.sh
+RUN chmod +x netconf.sh
+
 ADD supervisord_ftp.conf /tmp/supervisord.conf
 
 ADD java/ /
