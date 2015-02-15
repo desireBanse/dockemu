@@ -10,7 +10,7 @@ RUN mkdir -p /var/run/sshd
 RUN mkdir /var/log/dockemu
 RUN echo "DefaultRoot   ~" >> /etc/proftpd/proftpd.conf
 
-
+WORKDIR /
 ADD netconf.sh /
 ADD ignite.sh /
 

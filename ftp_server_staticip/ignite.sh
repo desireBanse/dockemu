@@ -1,7 +1,7 @@
 #!/bin/bash
 
 
-bash netconf.sh
+bash /netconf.sh
 
 
 sleep 3
