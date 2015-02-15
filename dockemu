@@ -38,7 +38,15 @@ print "###  BRUTE FORCE ATTACK TO MESH NEWTORKS #####"
 print "##############################################"
 print ""
 print ""
-sys.exit(0)
+
+try:
+	ftpservers = input('How many ftpservers do you need? [defaults=%s]: '%ftpservers)
+	print
+except KeyboardInterrupt:
+	sys.exit(0)
+except:
+	print " ftpservers not provided, using defaults (%s)"%ftpservers
+	print
 
 try:
 	bots = input('How many bots do you need? [defaults=%s]: '%bots)
@@ -48,18 +56,6 @@ except KeyboardInterrupt:
 except:
 	print " bots not provided, using defaults (%s)"%bots
 	print
-
-#server to attack
-try:
-	aux = raw_input('Enter the IP of the server to attack? [defaults=%s]: '%server)
-	if aux != "":
-		server=aux
-	print
-except KeyboardInterrupt:
-	sys.exit(0)
-except:
-	print "server not provided, using defaults (%s)"%server
-	print 
 
 #duration of the experiment
 try:
@@ -75,40 +71,41 @@ except:
 print "STARTING DOCKEMU BOT-NET ...."
 names=[]
 
+#by the moment just support 253 ftpservers
+if ftpservers > 253:
+	print "ftpservers can not be > 253"
+	sys.exit(0)
+
 #Starting servers
 for i in range(ftpservers):
-	logging.info("STARTING dockemu-ftpserver-%s"%i)
-        cmd="docker run -d -v %s/log/:/var/log/dockemu/ --name dockemu-ftpserver-%s --privileged %s &>/dev/null"%(ROOT,i,imagegg)
-        print cmd
-        try:
-                print
-                try:
-                        p = subprocess.Popen(cmd , shell=True)
-                        time.sleep(1)
-                except:
-                        print "CANNOT START dockemu-ftpserver-%s"%i
+	
+	cmd="docker run -e 'ipaddress=172.17.%s.5' -d -v %s/log/:/var/log/dockemu/ --name dockemu-ftpserver-%s --privileged %s &>/dev/null"%(i,ROOT,i,imagegg)
+	print cmd
+	sys.exit(0)
+	try:
+		print
+		try:
+			p = subprocess.Popen(cmd , shell=True)
+			logging.info("STARTING dockemu-ftpserver-%s with IPAddress 172.17.%s.5"%(i,i))
+			time.sleep(1)
+		except:
+			print "CANNOT START dockemu-ftpserver-%s"%i
 
-                output = subprocess.check_output("docker inspect dockemu-ftpserver-%s"%i, shell=True)
-                for IP in output.splitlines():
-                        if "IPAddress" in IP:
-                                print IP
-                                logging.info("dockemu-ftpserver"+str(i)+IP)
-
-
-        except:
-                print traceback.format_exc()
-                print "ERROR IN LOG dockemu-ftpserver-%s"%i
+	except:
+		print traceback.format_exc()
+		print "ERROR IN LOG dockemu-ftpserver-%s"%i
 failed=False
 
-
+time.sleep(2)
+sys.exit(0)
 for i in range(bots):
-	logging.info("STARTING dockemu-%s"%i)
 	cmd="docker run -d -v %s/log/:/var/log/dockemu/ --name  dockemu-%s %s ./attackftp -t %s -p users &>/dev/null"%(ROOT,i,imagebot,server)
 	print cmd
 	try:
 		print
 		try:
 			p = subprocess.Popen(cmd , shell=True)
+			logging.info("STARTING dockemu-%s"%i)
 			time.sleep(1)
 		except:
 			print "CANNOT START dockemu-%s"%i
