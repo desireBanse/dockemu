@@ -14,8 +14,8 @@ RUN echo "DefaultRoot   ~" >> /etc/proftpd/proftpd.conf
 ADD netconf.sh /
 ADD ignite.sh /
 
-RUN chmod +x ignite.sh
-RUN chmod +x netconf.sh
+RUN chmod +x /ignite.sh
+RUN chmod +x /netconf.sh
 
 ADD supervisord_ftp.conf /tmp/supervisord.conf
 
