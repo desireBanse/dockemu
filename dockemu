@@ -90,7 +90,7 @@ for i in range(ftpservers):
 	try:
 		print
 		try:
-			#p = subprocess.Popen(cmd , shell=True)
+			p = subprocess.Popen(cmd , shell=True)
 			logging.info("STARTING dockemu-ftpserver-%s with IPAddress 172.17.%s.5"%(i,i))
 			ftpserver_list=ftpserver_list+["dockemu-ftpserver-%s"%i]
 			ftpserver_ips=ftpserver_ips+"172.17.%s.5 "%i
@@ -113,9 +113,8 @@ if bots > 253:
 	sys.exit(0)
 
 for i in range(bots):
-	cmd="docker run -d -v %s/log/:/var/log/dockemu/ --name  dockemu-%s %s ./attackftp '%s' &>/dev/null"%(ROOT,i,imagebot,ftpserver_ips)
+	cmd="docker run -d -v %s/log/:/var/log/dockemu/ --name  dockemu-%s %s  '%s' &>/dev/null"%(ROOT,i,imagebot,ftpserver_ips)
 	print cmd
-	sys.exit(0)
 	try:
 		print
 		try:
