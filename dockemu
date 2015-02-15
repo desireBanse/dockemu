@@ -10,13 +10,17 @@ exit
 main_log=ROOT+"/log/dockemu.log"
 #defaults:
 bots=2
-image="dockemu/hydra:hydrabot"
-server="192.168.8.66"
+ftpservers=1
+imagegg="dockemu/ftp:staticip"    #get image for good guys with ftp server and static ip
+imagebot="dockemu/botnet"         #get image for botnet guys
+server="172.17.5.100"
 duration=20
 delay=0
 
 logging.basicConfig(filename=main_log,level=logging.DEBUG,  format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
 
+#clear screen
+os.system(['clear','cls'][os.name =='nt'])
 
 #intro banner
 print "##############################################"
@@ -29,7 +33,8 @@ print "| |/ /\ \_/ / \__/\| |\  \| |___| |  | | |_| |"
 print "|___/  \___/ \____/\_| \_/\____/\_|  |_/\___/ "
 print ""
 print "##############################################"
-print "#########  WELCOME TO DOCKEMU V.1.0  #########"
+print "#########  WELCOME TO DOCKEMU V.2.0  #########"
+print "###  BRUTE FORCE ATTACK TO MESH NEWTORKS #####"
 print "##############################################"
 print ""
 print ""
@@ -65,22 +70,38 @@ except:
 	print 
 
 
-#delay between docker bots start
-try:
-	delay = input('Enter the delay between the start of each docker bot [defaults=%s s]: '%delay)
-	print
-except KeyboardInterrupt:
-	sys.exit(0)
-except:
-	print "delay not provided, using defaults (%s)"%delay
-	print
-
-
 print "STARTING DOCKEMU BOT-NET ...."
 names=[]
+
+#Starting servers
+for i in range(ftpservers):
+	logging.info("STARTING dockemu-ftpserver-%s"%i)
+        cmd="docker run -d -v %s/log/:/var/log/dockemu/ --name dockemu-ftpserver-%s --privileged %s &>/dev/null"%(ROOT,i,imagegg)
+        print cmd
+        try:
+                print
+                try:
+                        p = subprocess.Popen(cmd , shell=True)
+                        time.sleep(1)
+                except:
+                        print "CANNOT START dockemu-ftpserver-%s"%i
+
+                output = subprocess.check_output("docker inspect dockemu-ftpserver-%s"%i, shell=True)
+                for IP in output.splitlines():
+                        if "IPAddress" in IP:
+                                print IP
+                                logging.info("dockemu-ftpserver"+str(i)+IP)
+
+
+        except:
+                print traceback.format_exc()
+                print "ERROR IN LOG dockemu-ftpserver-%s"%i
+failed=False
+
+
 for i in range(bots):
 	logging.info("STARTING dockemu-%s"%i)
-	cmd="docker run -d -v %s/log/:/var/log/dockemu/ --name  dockemu-%s -e 'server=%s' dockemu/hydra:hydrabot  &>/dev/null"%(ROOT,i,server)
+	cmd="docker run -d -v %s/log/:/var/log/dockemu/ --name  dockemu-%s %s ./attackftp -t %s -p users &>/dev/null"%(ROOT,i,imagebot,server)
 	print cmd
 	try:
 		print
@@ -104,10 +125,28 @@ for i in range(bots):
 
 
 failed=False
+
 if duration > 0:
 	print
 	print "Waiting %ss to stop the attack (all docker botnet)"%duration
 	time.sleep(duration)
+	
+	try:
+                for i in range(ftpservers):
+                        cmd="docker kill dockemu-ftpserver-%s && docker stop dockemu-ftpserver-%s  && docker rm dockemu-ftpserver-%s "%(i,i,i)
+                        logging.info("ENDING dockemu-ftpserver-%s"%i)
+                        print cmd
+                        try:
+                                p = subprocess.Popen(cmd , shell=True)
+                                print s
+                        except:
+                                failed=True
+                                print "failed to stop dockemu-ftpserver-%s!!"%i
+        except:
+                cmd="docker stop $(docker ps -a -q) && docker rm $(docker ps -a -q)"
+                p = subprocess.Popen(cmd , shell=True)
+	
+
 	try:
 		for i in range(bots):
 			cmd="docker kill dockemu-%s && docker stop dockemu-%s  && docker rm dockemu-%s "%(i,i,i)

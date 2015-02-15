@@ -6,7 +6,8 @@ RUN apt-get update
 RUN apt-get -y install \
 	openssh-server \
 	nano \
-	olsrd
+	olsrd \
+	ftp
 
 WORKDIR /
 
