@@ -17,6 +17,10 @@ server="172.17.5.100"
 duration=20
 delay=0
 
+try:
+    os.remove(main_log)
+except OSError:
+    pass
 logging.basicConfig(filename=main_log,level=logging.DEBUG,  format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
 
 #clear screen
