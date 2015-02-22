@@ -194,6 +194,7 @@ def stop_all():
 
 
 def stats():
+	print "stats"
 	client = pymongo.MongoClient(mongo_server, mongo_port)
 	db = client[dbname]
 	collection = db['collection']
@@ -213,6 +214,7 @@ def main():
 	#start_ftpservers
 	#start_botnet
 	#stop_all
+	print "awas"
 	stats
 
 
