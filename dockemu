@@ -98,14 +98,14 @@ def start_ibf():
 
 names=[]
 
+ftpserver_list=[]
+ftpserver_ips=""
 def start_ftpservers():
 	#by the moment just support 253 ftpservers
 	if ftpservers > 253:
 		print "ftpservers can not be > 253"
 		sys.exit(0)
 
-	ftpserver_list=[]
-	ftpserver_ips=""
 	#Starting servers
 	for i in range(ftpservers):
 		
