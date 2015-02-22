@@ -191,31 +191,29 @@ def stop_all():
 			p = subprocess.Popen(cmd , shell=True)
 
 
-def asdas():
-	print "Asdasdasd"
-
-def stats():
-	print "stats"
-	client = pymongo.MongoClient('192.168.8.10', 27017)
-	db = client['dbTest150210-1200']
-	collection = db['collection']
-	ip = '172.17.1.33'
 
 
+#def stats():
+print "stats"
+client = pymongo.MongoClient('192.168.8.10', 27017)
+db = client['dbTest150210-1200']
+collection = db['collection']
+ip = '172.17.1.33'
 
-	#Finding false matches
-	falseMatches = collection.find_one({'sourceIP':'172.17.1.33'},{'falseMatch':1,'_id':0})
-	print falseMatches
 
-	print falseMatches['falseMatch']
+
+#Finding false matches
+falseMatches = collection.find_one({'sourceIP':'172.17.1.33'},{'falseMatch':1,'_id':0})
+print falseMatches
+
+	#print falseMatches['falseMatch']
 
 
 def main():
 	
-	#start_ftpservers
-	#start_botnet
-	#stop_all
-	asdas()
+	#start_ftpservers()
+	#start_botnet()
+	#stop_all()
 	print "awas"
 
 	stats()
