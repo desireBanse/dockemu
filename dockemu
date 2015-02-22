@@ -226,7 +226,6 @@ def stats():
 
 	#array=[{u'falseMatch': 8}, {u'falseMatch': 4}, {u'falseMatch': 5}, {u'falseMatch': 6}]
 	print bot_ips
-	sys.exit(0)
 	array=[]
 	#Finding false matches
 	for ip in bot_ips:
