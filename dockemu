@@ -196,8 +196,8 @@ def asdas():
 
 def stats():
 	print "stats"
-	client = pymongo.MongoClient(mongo_server, mongo_port)
-	db = client[dbname]
+	client = pymongo.MongoClient('192.168.8.10', 27017)
+	db = client['dbTest150210-1200']
 	collection = db['collection']
 	ip = '172.17.1.33'
 
