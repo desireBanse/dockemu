@@ -226,8 +226,8 @@ def stats():
 	mean=statistics.mean(count)
 	median= statistics.median(count)
 	stdev=statistics.stdev(count)
-	maximum=max(a)
-	minimum=min(a)
+	maximum=max(count)
+	minimum=min(count)
 
 	print mean
 	print median
