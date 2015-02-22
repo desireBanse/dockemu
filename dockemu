@@ -132,7 +132,7 @@ def start_ftpservers():
 
 # print ftpserver_list
 # print ftpserver_ips
-
+bot_ips=[]
 def start_botnet():
 	if bots > 253:
 		print "bots can not be > 253"
@@ -154,6 +154,7 @@ def start_botnet():
 			for IP in output.splitlines():
 				if "IPAddress" in IP:
 					print IP
+					bot_ips=bot_ips+[IP]
 					logging.info("dockemu-"+str(i)+IP)
 			
 
@@ -161,12 +162,11 @@ def start_botnet():
 			print traceback.format_exc()
 			print "ERROR IN LOG dockemu-%s"%i
 		time.sleep(delay)
-
+print bot_ips
 
 
 def stop_all():
 	failed=False
-
 	if duration > 0:
 		print
 		print "Waiting %ss to stop the attack (all docker botnet)"%duration
@@ -187,7 +187,6 @@ def stop_all():
 			cmd="docker stop $(docker ps -a -q) && docker rm $(docker ps -a -q)"
 			p = subprocess.Popen(cmd , shell=True)
 		
-
 		try:
 			for i in range(bots):
 				cmd="docker kill dockemu-%s && docker stop dockemu-%s  && docker rm dockemu-%s "%(i,i,i)
