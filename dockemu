@@ -51,37 +51,50 @@ print "##############################################"
 print ""
 print ""
 
+def welcome():
+	try:
+		dbname = input('Enter the mongo DB name: [defaults=%s]: '%dbname)
+		print
+	except KeyboardInterrupt:
+		sys.exit(0)
+	except:
+		print " mongo DB name not provided, using defaults (%s)"%dbname
+		print
 
-try:
-	ftpservers = input('How many ftpservers do you need? [defaults=%s]: '%ftpservers)
-	print
-except KeyboardInterrupt:
-	sys.exit(0)
-except:
-	print " ftpservers not provided, using defaults (%s)"%ftpservers
-	print
+	try:
+		ftpservers = input('How many ftpservers do you need? [defaults=%s]: '%ftpservers)
+		print
+	except KeyboardInterrupt:
+		sys.exit(0)
+	except:
+		print " ftpservers not provided, using defaults (%s)"%ftpservers
+		print
 
-try:
-	bots = input('How many bots do you need? [defaults=%s]: '%bots)
-	print
-except KeyboardInterrupt:
-	sys.exit(0)
-except:
-	print " bots not provided, using defaults (%s)"%bots
-	print
+	try:
+		bots = input('How many bots do you need? [defaults=%s]: '%bots)
+		print
+	except KeyboardInterrupt:
+		sys.exit(0)
+	except:
+		print " bots not provided, using defaults (%s)"%bots
+		print
 
-#duration of the experiment
-try:
-	duration = input('Enter the duration of the attack [defaults=%s s], -1=forever:  '%duration)
-	print
-except KeyboardInterrupt:
-	sys.exit(0)
-except:
-	print "duration not provided, using defaults (%s)"%duration
-	print 
-print "STARTING DOCKEMU BOT-NET ...."
+	#duration of the experiment
+	try:
+		duration = input('Enter the duration of the attack [defaults=%s s], -1=forever:  '%duration)
+		print
+	except KeyboardInterrupt:
+		sys.exit(0)
+	except:
+		print "duration not provided, using defaults (%s)"%duration
+		print 
+	print "STARTING DOCKEMU BOT-NET ...."
 
 
+def start_ibf():
+	print "start IBF server"
+	cmd = "/usr/bin/java -cp frameworkssh.jar:commons-io-2.4.jar:mongo-java-driver-2.12.2.jar com.galileo.phd.securityframework.ssh.core.Main -logFilePath /var/log/auth.log -mongoServer monserver.galileo.edu -database %s"%dbname
+	#p = subprocess.Popen(cmd , shell=True,cwd="/home/chepeftw")
 
 names=[]
 
@@ -194,27 +207,26 @@ def stop_all():
 
 
 def stats():
-	print "stats"
 	client = pymongo.MongoClient(mongo_server, mongo_port)
 	db = client[dbname]
 	collection = db[correlation]
 	ip = '172.17.1.33'
 
 
+	array=[{u'falseMatch': 8}, {u'falseMatch': 4}, {u'falseMatch': 5}, {u'falseMatch': 6}]
 
 	#Finding false matches
-	falseMatches = collection.find_one({'sourceIP':'172.17.1.33'},{'falseMatch':1,'_id':0})
-	print falseMatches
-
-	#print falseMatches['falseMatch']
+	#falseMatches = collection.find_one({'sourceIP':'172.17.1.33'},{'falseMatch':1,'_id':0})
+	for falseMatches in array:
+		print falseMatches
+		print falseMatches['falseMatch']
 
 
 def main():
-	
+	welcome()
 	#start_ftpservers()
 	#start_botnet()
 	#stop_all()
-	print "awas"
 
 	stats()
 
