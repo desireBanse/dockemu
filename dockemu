@@ -117,7 +117,7 @@ def start_ftpservers():
 				p = subprocess.Popen(cmd , shell=True)
 				logging.info("STARTING dockemu-ftpserver-%s with IPAddress 172.17.%s.5"%(i,i))
 				ftpserver_list.append("dockemu-ftpserver-%s"%i)
-				ftpserver_ips=ftpserver_ips+"172.17.%s.5 "%i
+				ftpserver_ips.append("172.17.%s.5 "%i)
 				time.sleep(1)
 			except:
 				print traceback.format_exc()
@@ -131,6 +131,7 @@ def start_ftpservers():
 
 
 
+
 # print ftpserver_list
 # print ftpserver_ips
 bot_ips=[]
@@ -140,7 +141,7 @@ def start_botnet():
 		sys.exit(0)
 
 	for i in range(bots):
-		cmd="docker run -d -v %s/log/:/var/log/dockemu/ --name  dockemu-botnet-%s %s  '%s' &>/dev/null"%(ROOT,i,imagebot,ftpserver_ips)
+		cmd="docker run -d -v %s/log/:/var/log/dockemu/ --name  dockemu-botnet-%s %s  '%s' &>/dev/null"%(ROOT,i,imagebot,' '.join(ftpserver_ips))
 		print cmd
 		try:
 			print
