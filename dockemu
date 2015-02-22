@@ -212,14 +212,16 @@ def stats():
 	ip = '172.17.1.33'
 
 
-	array=[{u'falseMatch': 8}, {u'falseMatch': 4}, {u'falseMatch': 5}, {u'falseMatch': 6}]
+	#array=[{u'falseMatch': 8}, {u'falseMatch': 4}, {u'falseMatch': 5}, {u'falseMatch': 6}]
 
+	array=[]
 	#Finding false matches
-	#falseMatches = collection.find_one({'sourceIP':'172.17.1.33'},{'falseMatch':1,'_id':0})
+	for ip in bot_ips:
+		falseMatches = collection.find_one({'sourceIP':ip},{'falseMatch':1,'_id':0})
+		array+=[falseMatches]
+		
 	count=[]
 	for falseMatches in array:
-		#print falseMatches
-		#print falseMatches['falseMatch']
 		count+=[falseMatches['falseMatch']]
 	print count
 
