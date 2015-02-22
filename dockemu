@@ -193,18 +193,18 @@ def stop_all():
 
 
 
-#def stats():
-print "stats"
-client = pymongo.MongoClient('192.168.8.10', 27017)
-db = client['dbTest150210-1200']
-collection = db['collection']
-ip = '172.17.1.33'
+def stats():
+	print "stats"
+	client = pymongo.MongoClient(mongo_server, mongo_port)
+	db = client[dbname]
+	collection = db[collection]
+	ip = '172.17.1.33'
 
 
 
-#Finding false matches
-falseMatches = collection.find_one({'sourceIP':'172.17.1.33'},{'falseMatch':1,'_id':0})
-print falseMatches
+	#Finding false matches
+	falseMatches = collection.find_one({'sourceIP':'172.17.1.33'},{'falseMatch':1,'_id':0})
+	print falseMatches
 
 	#print falseMatches['falseMatch']
 
@@ -216,7 +216,7 @@ def main():
 	#stop_all()
 	print "awas"
 
-	stats()
+	#stats()
 
 
 if __name__ == "__main__":
