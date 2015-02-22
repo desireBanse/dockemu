@@ -116,7 +116,7 @@ def start_ftpservers():
 			try:
 				p = subprocess.Popen(cmd , shell=True)
 				logging.info("STARTING dockemu-ftpserver-%s with IPAddress 172.17.%s.5"%(i,i))
-				ftpserver_list=ftpserver_list+["dockemu-ftpserver-%s"%i]
+				ftpserver_list.append("dockemu-ftpserver-%s"%i)
 				ftpserver_ips=ftpserver_ips+"172.17.%s.5 "%i
 				time.sleep(1)
 			except:
@@ -155,7 +155,7 @@ def start_botnet():
 			for IP in output.splitlines():
 				if "IPAddress" in IP:
 					print IP
-					bot_ips=bot_ips+[IP]
+					bot_ips.append(IP)
 					logging.info("dockemu-"+str(i)+IP)
 			
 
