@@ -216,7 +216,7 @@ def main():
 	#stop_all()
 	print "awas"
 
-	#stats()
+	stats()
 
 
 if __name__ == "__main__":
