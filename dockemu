@@ -220,7 +220,7 @@ def stats():
 	for falseMatches in array:
 		print falseMatches
 		print falseMatches['falseMatch']
-		count+=falseMatches['falseMatch']
+		count+=[falseMatches['falseMatch']]
 	print count
 
 
