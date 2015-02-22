@@ -8,7 +8,7 @@ ROOT=os.path.dirname(os.path.abspath(__file__))
 
 #print ROOT
 #MONGO
-mongo_server="192.168.8.10"
+mongo_server='192.168.8.10'
 mongo_port=27017 
 dbname="dbTest150210-1200"
 collection="correlation"
@@ -191,7 +191,8 @@ def stop_all():
 			p = subprocess.Popen(cmd , shell=True)
 
 
-
+def asdas():
+	print "Asdasdasd"
 
 def stats():
 	print "stats"
@@ -215,6 +216,7 @@ def main():
 	#start_botnet
 	#stop_all
 	print "awas"
+	asdas
 	stats
 
 
