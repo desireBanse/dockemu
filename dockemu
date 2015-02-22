@@ -99,7 +99,7 @@ def start_ibf():
 names=[]
 
 ftpserver_list=[]
-ftpserver_ips=""
+ftpserver_ips=[]
 def start_ftpservers():
 	#by the moment just support 253 ftpservers
 	if ftpservers > 253:
