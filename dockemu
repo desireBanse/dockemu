@@ -216,9 +216,12 @@ def stats():
 
 	#Finding false matches
 	#falseMatches = collection.find_one({'sourceIP':'172.17.1.33'},{'falseMatch':1,'_id':0})
+	count=[]
 	for falseMatches in array:
 		print falseMatches
 		print falseMatches['falseMatch']
+		count+=falseMatches['falseMatch']
+	print count
 
 
 def main():
