@@ -120,6 +120,7 @@ def start_ftpservers():
 				ftpserver_ips=ftpserver_ips+"172.17.%s.5 "%i
 				time.sleep(1)
 			except:
+				print traceback.format_exc()
 				print "CANNOT START dockemu-ftpserver-%s"%i
 
 		except:
