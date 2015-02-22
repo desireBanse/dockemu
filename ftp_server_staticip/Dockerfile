@@ -31,5 +31,7 @@ RUN echo  'LogFormat auth "%t %H ip-dst:%L Failed password for invalid user %U f
 RUN echo "ExtendedLog /var/log/auth.log AUTH auth"  >> /etc/proftpd/proftpd.conf
 RUN echo "ExtendedLog /var/log/proftpd.log ALL default"  >> /etc/proftpd/proftpd.conf
 
+RUN mkdir /var/log/auth.log
+
 CMD /ignite.sh
 
