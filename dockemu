@@ -200,8 +200,9 @@ def stop_all():
 					failed=True
 					print "failed to stop dockemu-%s!!"%i
 		except:
-			cmd="docker stop $(docker ps -a -q) && docker rm $(docker ps -a -q)"
-			p = subprocess.Popen(cmd , shell=True)
+			print "execept"
+			#cmd="docker stop $(docker ps -a -q) && docker rm $(docker ps -a -q)"
+			#p = subprocess.Popen(cmd , shell=True)
 
 
 
