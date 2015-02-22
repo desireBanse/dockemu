@@ -10,7 +10,7 @@ ROOT=os.path.dirname(os.path.abspath(__file__))
 #MONGO
 mongo_server='192.168.8.10'
 mongo_port=27017 
-dbname="dbTest150210-1200"
+dbname="dbTest150222_1200"
 correlation="correlation"
 
 #logging options: 
@@ -24,6 +24,7 @@ imagebot="dockemu/botnet"         #get image for botnet guys
 server="172.17.5.100"
 duration=20
 delay=0
+dockers=[]
 
 try:
     os.remove(main_log)
@@ -88,7 +89,6 @@ except KeyboardInterrupt:
 except:
 	print "duration not provided, using defaults (%s)"%duration
 	print 
-print "STARTING DOCKEMU BOT-NET ...."
 
 
 def start_ibf():
@@ -105,6 +105,7 @@ def start_ftpservers():
 	if ftpservers > 253:
 		print "ftpservers can not be > 253"
 		sys.exit(0)
+	print "STARTING FTP servers"
 
 	#Starting servers
 	for i in range(ftpservers):
@@ -117,6 +118,7 @@ def start_ftpservers():
 				p = subprocess.Popen(cmd , shell=True)
 				logging.info("STARTING dockemu-ftpserver-%s with IPAddress 172.17.%s.5"%(i,i))
 				ftpserver_list.append("dockemu-ftpserver-%s"%i)
+				dockers.append("dockemu-ftpserver-%s"%i)
 				ftpserver_ips.append("172.17.%s.5 "%i)
 				time.sleep(1)
 			except:
@@ -139,6 +141,7 @@ def start_botnet():
 	if bots > 253:
 		print "bots can not be > 253"
 		sys.exit(0)
+	print "STARTING DOCKEMU BOT-NET ...."
 
 	for i in range(bots):
 		cmd="docker run -d -v %s/log/:/var/log/dockemu/ --name  dockemu-botnet-%s %s  '%s' &>/dev/null"%(ROOT,i,imagebot,' '.join(ftpserver_ips))
@@ -147,7 +150,8 @@ def start_botnet():
 			print
 			try:
 				p = subprocess.Popen(cmd , shell=True)
-				logging.info("STARTING dockemu-%s"%i)
+				logging.info("STARTING dockemu-botnet-%s"%i)
+				dockers.append("dockemu-botnet-%s"%i)
 				time.sleep(1)
 			except:
 				print "CANNOT START dockemu-%s"%i
@@ -157,7 +161,7 @@ def start_botnet():
 				if "IPAddress" in IP:
 					print IP
 					bot_ips.append(IP)
-					logging.info("dockemu-"+str(i)+IP)
+					logging.info("dockemu-botnet IPAddress:"+str(i)+IP)
 			
 
 		except:
