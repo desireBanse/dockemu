@@ -213,7 +213,7 @@ def main():
 	#start_ftpservers
 	#start_botnet
 	#stop_all
-	#stats
+	stats
 
 
 if __name__ == "__main__":
