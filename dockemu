@@ -215,8 +215,9 @@ def main():
 	#start_ftpservers
 	#start_botnet
 	#stop_all
-	print "awas"
 	asdas
+	print "awas"
+
 	stats
 
 
