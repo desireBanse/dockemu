@@ -150,7 +150,7 @@ def start_botnet():
 			except:
 				print "CANNOT START dockemu-%s"%i
 			
-			output = subprocess.check_output("docker inspect dockemu-%s"%i, shell=True)
+			output = subprocess.check_output("docker inspect dockemu-botnet-%s"%i, shell=True)
 			for IP in output.splitlines():
 				if "IPAddress" in IP:
 					print IP
