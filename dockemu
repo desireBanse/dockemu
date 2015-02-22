@@ -51,44 +51,44 @@ print "##############################################"
 print ""
 print ""
 
-def welcome():
-	try:
-		dbname = input('Enter the mongo DB name: [defaults=%s]: '%dbname)
-		print
-	except KeyboardInterrupt:
-		sys.exit(0)
-	except:
-		print " mongo DB name not provided, using defaults (%s)"%dbname
-		print
 
-	try:
-		ftpservers = input('How many ftpservers do you need? [defaults=%s]: '%ftpservers)
-		print
-	except KeyboardInterrupt:
-		sys.exit(0)
-	except:
-		print " ftpservers not provided, using defaults (%s)"%ftpservers
-		print
+try:
+	dbname = input('Enter the mongo DB name: [defaults=%s]: '%dbname)
+	print
+except KeyboardInterrupt:
+	sys.exit(0)
+except:
+	print " mongo DB name not provided, using defaults (%s)"%dbname
+	print
 
-	try:
-		bots = input('How many bots do you need? [defaults=%s]: '%bots)
-		print
-	except KeyboardInterrupt:
-		sys.exit(0)
-	except:
-		print " bots not provided, using defaults (%s)"%bots
-		print
+try:
+	ftpservers = input('How many ftpservers do you need? [defaults=%s]: '%ftpservers)
+	print
+except KeyboardInterrupt:
+	sys.exit(0)
+except:
+	print " ftpservers not provided, using defaults (%s)"%ftpservers
+	print
 
-	#duration of the experiment
-	try:
-		duration = input('Enter the duration of the attack [defaults=%s s], -1=forever:  '%duration)
-		print
-	except KeyboardInterrupt:
-		sys.exit(0)
-	except:
-		print "duration not provided, using defaults (%s)"%duration
-		print 
-	print "STARTING DOCKEMU BOT-NET ...."
+try:
+	bots = input('How many bots do you need? [defaults=%s]: '%bots)
+	print
+except KeyboardInterrupt:
+	sys.exit(0)
+except:
+	print " bots not provided, using defaults (%s)"%bots
+	print
+
+#duration of the experiment
+try:
+	duration = input('Enter the duration of the attack [defaults=%s s], -1=forever:  '%duration)
+	print
+except KeyboardInterrupt:
+	sys.exit(0)
+except:
+	print "duration not provided, using defaults (%s)"%duration
+	print 
+print "STARTING DOCKEMU BOT-NET ...."
 
 
 def start_ibf():
@@ -222,7 +222,6 @@ def stats():
 
 
 def main():
-	welcome()
 	#start_ftpservers()
 	#start_botnet()
 	#stop_all()
