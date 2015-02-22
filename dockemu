@@ -98,7 +98,6 @@ def start_ibf():
 
 names=[]
 
-ftpserver_list=[]
 ftpserver_ips=[]
 def start_ftpservers():
 	#by the moment just support 253 ftpservers
@@ -117,7 +116,6 @@ def start_ftpservers():
 			try:
 				p = subprocess.Popen(cmd , shell=True)
 				logging.info("STARTING dockemu-ftpserver-%s with IPAddress 172.17.%s.5"%(i,i))
-				ftpserver_list.append("dockemu-ftpserver-%s"%i)
 				dockers.append("dockemu-ftpserver-%s"%i)
 				ftpserver_ips.append("172.17.%s.5 "%i)
 				time.sleep(1)
@@ -183,6 +181,7 @@ def stop_all():
 				print "Killing %s"%container
 				cmd="docker kill %s"%container
 				p = subprocess.Popen(cmd , shell=True)
+				time.sleep(3)
 				cmd="docker rm %s"%container
 				p = subprocess.Popen(cmd , shell=True)
 				logging.info("ENDING %s"%container)
@@ -228,7 +227,8 @@ def stats():
 
 
 	#array=[{u'falseMatch': 8}, {u'falseMatch': 4}, {u'falseMatch': 5}, {u'falseMatch': 6}]
-
+	print bot_ips
+	sys.exit(0)
 	array=[]
 	#Finding false matches
 	for ip in bot_ips:
@@ -237,7 +237,7 @@ def stats():
 
 	count=[]
 	for falseMatches in array:
-		count+=[falseMatches['falseMatch']]
+		count.append(falseMatches['falseMatch'])
 	print count
 
 	mean=statistics.mean(count)
