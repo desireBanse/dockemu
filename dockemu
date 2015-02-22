@@ -179,31 +179,39 @@ def stop_all():
 		time.sleep(duration)
 		
 		try:
-			for i in range(ftpservers):
-				cmd="docker kill dockemu-ftpserver-%s && docker stop dockemu-ftpserver-%s  && docker rm dockemu-ftpserver-%s "%(i,i,i)
-				logging.info("ENDING dockemu-ftpserver-%s"%i)
-				print cmd
-				try:
-					p = subprocess.Popen(cmd , shell=True)
-					print s
-				except:
-					failed=True
-					print "failed to stop dockemu-ftpserver-%s!!"%i
-		except:
-			cmd="docker stop $(docker ps -a -q) && docker rm $(docker ps -a -q)"
-			p = subprocess.Popen(cmd , shell=True)
+			for container in dockers:
+				print "Killing %s"%container
+				cmd="docker kill %s"%container
+				p = subprocess.Popen(cmd , shell=True)
+				cmd="docker rm %s"%container
+				p = subprocess.Popen(cmd , shell=True)
+				logging.info("ENDING %s"%container)
+		# try:
+		# 	for i in range(ftpservers):
+		# 		cmd="docker kill dockemu-ftpserver-%s && docker stop dockemu-ftpserver-%s  && docker rm dockemu-ftpserver-%s "%(i,i,i)
+		# 		logging.info("ENDING dockemu-ftpserver-%s"%i)
+		# 		print cmd
+		# 		try:
+		# 			p = subprocess.Popen(cmd , shell=True)
+		# 			print s
+		# 		except:
+		# 			failed=True
+		# 			print "failed to stop dockemu-ftpserver-%s!!"%i
+		# except:
+		# 	cmd="docker stop $(docker ps -a -q) && docker rm $(docker ps -a -q)"
+		# 	p = subprocess.Popen(cmd , shell=True)
 		
-		try:
-			for i in range(bots):
-				cmd="docker kill dockemu-%s && docker stop dockemu-%s  && docker rm dockemu-%s "%(i,i,i)
-				logging.info("ENDING dockemu-%s"%i)
-				print cmd
-				try:
-					p = subprocess.Popen(cmd , shell=True)
-					print s
-				except:
-					failed=True
-					print "failed to stop dockemu-%s!!"%i
+		# try:
+		# 	for i in range(bots):
+		# 		cmd="docker kill dockemu-%s && docker stop dockemu-%s  && docker rm dockemu-%s "%(i,i,i)
+		# 		logging.info("ENDING dockemu-%s"%i)
+		# 		print cmd
+		# 		try:
+		# 			p = subprocess.Popen(cmd , shell=True)
+		# 			print s
+		# 		except:
+		# 			failed=True
+		# 			print "failed to stop dockemu-%s!!"%i
 		except:
 			print "execept"
 			#cmd="docker stop $(docker ps -a -q) && docker rm $(docker ps -a -q)"
