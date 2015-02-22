@@ -158,10 +158,8 @@ def start_botnet():
 			for IP in output.splitlines():
 				if "IPAddress" in IP:
 					print IP
-					bot_ips.append(IP)
-					logging.info("dockemu-botnet IPAddress:"+str(i)+IP)
-			
-
+					bot_ips.append(IP.split(": ")[1].replace("\"","").replace(","," "))
+					logging.info("dockemu-botnet "+str(i)+IP)
 		except:
 			print traceback.format_exc()
 			print "ERROR IN LOG dockemu-%s"%i
