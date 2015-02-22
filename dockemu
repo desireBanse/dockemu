@@ -2,7 +2,7 @@
 import subprocess, logging
 import sys, os, time
 import traceback
-import pymongo, json
+import pymongo, json, statistics
 
 ROOT=os.path.dirname(os.path.abspath(__file__))
 
@@ -218,10 +218,22 @@ def stats():
 	#falseMatches = collection.find_one({'sourceIP':'172.17.1.33'},{'falseMatch':1,'_id':0})
 	count=[]
 	for falseMatches in array:
-		print falseMatches
-		print falseMatches['falseMatch']
+		#print falseMatches
+		#print falseMatches['falseMatch']
 		count+=[falseMatches['falseMatch']]
 	print count
+
+	mean=statistics.mean(count)
+	median= statistics.median(count)
+	stdev=statistics.stdev(count)
+	maximum=max(a)
+	minimum=min(a)
+
+	print mean
+	print median
+	print stdev
+	print maximum
+	print minimum
 
 
 def main():
