@@ -211,14 +211,14 @@ def stats():
 
 
 def main():
-	welcome
+	welcome()
 	#start_ftpservers
 	#start_botnet
 	#stop_all
-	asdas
+	asdas()
 	print "awas"
 
-	stats
+	stats()
 
 
 if __name__ == "__main__":
