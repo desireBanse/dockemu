@@ -229,11 +229,11 @@ def stats():
 	maximum=max(count)
 	minimum=min(count)
 
-	print mean
-	print median
-	print stdev
-	print maximum
-	print minimum
+	print "AVERAGE: "+str(mean)
+	print "MEDIAN: "+str(median)
+	print "STDEV: "+str(stdev)
+	print "MAX: "+str(maximum)
+	print "MIN: "+str(minimum)
 
 
 def main():
