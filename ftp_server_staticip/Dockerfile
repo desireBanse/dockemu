@@ -3,7 +3,7 @@ FROM dockerfile/supervisor
 MAINTAINER Oscar Rodas orodas@galileo.edu, marcos cano marcos.cano@galileo.edu
 
 RUN apt-get update
-RUN apt-get install -y proftpd nano olsrd supervisor iptables rsyslogd openjdk-7-jre 
+RUN apt-get install -y proftpd nano olsrd supervisor iptables rsyslog openjdk-7-jre 
 RUN mkdir -p /var/run/sshd
 
 
