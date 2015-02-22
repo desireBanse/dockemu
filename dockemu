@@ -219,7 +219,7 @@ def stats():
 	for ip in bot_ips:
 		falseMatches = collection.find_one({'sourceIP':ip},{'falseMatch':1,'_id':0})
 		array+=[falseMatches]
-		
+
 	count=[]
 	for falseMatches in array:
 		count+=[falseMatches['falseMatch']]
@@ -239,9 +239,10 @@ def stats():
 
 
 def main():
-	#start_ftpservers()
-	#start_botnet()
-	#stop_all()
+	#start_ibf()
+	start_ftpservers()
+	start_botnet()
+	stop_all()
 
 	stats()
 
