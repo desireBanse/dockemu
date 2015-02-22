@@ -2,12 +2,20 @@
 import subprocess, logging
 import sys, os, time
 import traceback
+import pymongo, json
 
 ROOT=os.path.dirname(os.path.abspath(__file__))
 
-print ROOT
- 
+#print ROOT
+#MONGO
+mongo_server="192.168.8.10"
+mongo_port=27017 
+dbname="dbTest150210-1200"
+collection="correlation"
+
+#logging options: 
 main_log=ROOT+"/log/dockemu.log"
+
 #defaults:
 bots=2
 ftpservers=1
@@ -43,135 +51,170 @@ print "##############################################"
 print ""
 print ""
 
-try:
-	ftpservers = input('How many ftpservers do you need? [defaults=%s]: '%ftpservers)
-	print
-except KeyboardInterrupt:
-	sys.exit(0)
-except:
-	print " ftpservers not provided, using defaults (%s)"%ftpservers
-	print
+def welcome():
+	try:
+		ftpservers = input('How many ftpservers do you need? [defaults=%s]: '%ftpservers)
+		print
+	except KeyboardInterrupt:
+		sys.exit(0)
+	except:
+		print " ftpservers not provided, using defaults (%s)"%ftpservers
+		print
 
-try:
-	bots = input('How many bots do you need? [defaults=%s]: '%bots)
-	print
-except KeyboardInterrupt:
-	sys.exit(0)
-except:
-	print " bots not provided, using defaults (%s)"%bots
-	print
+	try:
+		bots = input('How many bots do you need? [defaults=%s]: '%bots)
+		print
+	except KeyboardInterrupt:
+		sys.exit(0)
+	except:
+		print " bots not provided, using defaults (%s)"%bots
+		print
 
-#duration of the experiment
-try:
-	duration = input('Enter the duration of the attack [defaults=%s s], -1=forever:  '%duration)
-	print
-except KeyboardInterrupt:
-	sys.exit(0)
-except:
-	print "duration not provided, using defaults (%s)"%duration
-	print 
+	#duration of the experiment
+	try:
+		duration = input('Enter the duration of the attack [defaults=%s s], -1=forever:  '%duration)
+		print
+	except KeyboardInterrupt:
+		sys.exit(0)
+	except:
+		print "duration not provided, using defaults (%s)"%duration
+		print 
+	print "STARTING DOCKEMU BOT-NET ...."
 
 
-print "STARTING DOCKEMU BOT-NET ...."
+
 names=[]
 
-#by the moment just support 253 ftpservers
-if ftpservers > 253:
-	print "ftpservers can not be > 253"
-	sys.exit(0)
+def start_ftpservers():
+	#by the moment just support 253 ftpservers
+	if ftpservers > 253:
+		print "ftpservers can not be > 253"
+		sys.exit(0)
 
-ftpserver_list=[]
-ftpserver_ips=""
-#Starting servers
-for i in range(ftpservers):
-	
-	cmd="docker run -e 'ipaddress=172.17.%s.5' -d -v %s/log/:/var/log/dockemu/ --name dockemu-ftpserver-%s --privileged %s &>/dev/null"%(i,ROOT,i,imagegg)
-	print cmd
-	try:
-		print
+	ftpserver_list=[]
+	ftpserver_ips=""
+	#Starting servers
+	for i in range(ftpservers):
+		
+		cmd="docker run -e 'ipaddress=172.17.%s.5' -d -v %s/log/:/var/log/dockemu/ --name dockemu-ftpserver-%s --privileged %s &>/dev/null"%(i,ROOT,i,imagegg)
+		print cmd
 		try:
-			p = subprocess.Popen(cmd , shell=True)
-			logging.info("STARTING dockemu-ftpserver-%s with IPAddress 172.17.%s.5"%(i,i))
-			ftpserver_list=ftpserver_list+["dockemu-ftpserver-%s"%i]
-			ftpserver_ips=ftpserver_ips+"172.17.%s.5 "%i
-			time.sleep(1)
+			print
+			try:
+				p = subprocess.Popen(cmd , shell=True)
+				logging.info("STARTING dockemu-ftpserver-%s with IPAddress 172.17.%s.5"%(i,i))
+				ftpserver_list=ftpserver_list+["dockemu-ftpserver-%s"%i]
+				ftpserver_ips=ftpserver_ips+"172.17.%s.5 "%i
+				time.sleep(1)
+			except:
+				print "CANNOT START dockemu-ftpserver-%s"%i
+
 		except:
-			print "CANNOT START dockemu-ftpserver-%s"%i
+			print traceback.format_exc()
+			print "ERROR IN LOG dockemu-ftpserver-%s"%i
+	failed=False
+	time.sleep(2)
 
-	except:
-		print traceback.format_exc()
-		print "ERROR IN LOG dockemu-ftpserver-%s"%i
-failed=False
 
-time.sleep(2)
 
 # print ftpserver_list
 # print ftpserver_ips
 
-if bots > 253:
-	print "bots can not be > 253"
-	sys.exit(0)
+def start_botnet():
+	if bots > 253:
+		print "bots can not be > 253"
+		sys.exit(0)
 
-for i in range(bots):
-	cmd="docker run -d -v %s/log/:/var/log/dockemu/ --name  dockemu-botnet-%s %s  '%s' &>/dev/null"%(ROOT,i,imagebot,ftpserver_ips)
-	print cmd
-	try:
-		print
+	for i in range(bots):
+		cmd="docker run -d -v %s/log/:/var/log/dockemu/ --name  dockemu-botnet-%s %s  '%s' &>/dev/null"%(ROOT,i,imagebot,ftpserver_ips)
+		print cmd
 		try:
-			p = subprocess.Popen(cmd , shell=True)
-			logging.info("STARTING dockemu-%s"%i)
-			time.sleep(1)
+			print
+			try:
+				p = subprocess.Popen(cmd , shell=True)
+				logging.info("STARTING dockemu-%s"%i)
+				time.sleep(1)
+			except:
+				print "CANNOT START dockemu-%s"%i
+			
+			output = subprocess.check_output("docker inspect dockemu-%s"%i, shell=True)
+			for IP in output.splitlines():
+				if "IPAddress" in IP:
+					print IP
+					logging.info("dockemu-"+str(i)+IP)
+			
+
 		except:
-			print "CANNOT START dockemu-%s"%i
+			print traceback.format_exc()
+			print "ERROR IN LOG dockemu-%s"%i
+		time.sleep(delay)
+
+
+
+def stop_all():
+	failed=False
+
+	if duration > 0:
+		print
+		print "Waiting %ss to stop the attack (all docker botnet)"%duration
+		time.sleep(duration)
 		
-		output = subprocess.check_output("docker inspect dockemu-%s"%i, shell=True)
-		for IP in output.splitlines():
-			if "IPAddress" in IP:
-				print IP
-				logging.info("dockemu-"+str(i)+IP)
+		try:
+			for i in range(ftpservers):
+				cmd="docker kill dockemu-ftpserver-%s && docker stop dockemu-ftpserver-%s  && docker rm dockemu-ftpserver-%s "%(i,i,i)
+				logging.info("ENDING dockemu-ftpserver-%s"%i)
+				print cmd
+				try:
+					p = subprocess.Popen(cmd , shell=True)
+					print s
+				except:
+					failed=True
+					print "failed to stop dockemu-ftpserver-%s!!"%i
+		except:
+			cmd="docker stop $(docker ps -a -q) && docker rm $(docker ps -a -q)"
+			p = subprocess.Popen(cmd , shell=True)
 		
 
-	except:
-		print traceback.format_exc()
-		print "ERROR IN LOG dockemu-%s"%i
-	time.sleep(delay)
+		try:
+			for i in range(bots):
+				cmd="docker kill dockemu-%s && docker stop dockemu-%s  && docker rm dockemu-%s "%(i,i,i)
+				logging.info("ENDING dockemu-%s"%i)
+				print cmd
+				try:
+					p = subprocess.Popen(cmd , shell=True)
+					print s
+				except:
+					failed=True
+					print "failed to stop dockemu-%s!!"%i
+		except:
+			cmd="docker stop $(docker ps -a -q) && docker rm $(docker ps -a -q)"
+			p = subprocess.Popen(cmd , shell=True)
 
 
-failed=False
 
-if duration > 0:
-	print
-	print "Waiting %ss to stop the attack (all docker botnet)"%duration
-	time.sleep(duration)
-	
-	try:
-		for i in range(ftpservers):
-			cmd="docker kill dockemu-ftpserver-%s && docker stop dockemu-ftpserver-%s  && docker rm dockemu-ftpserver-%s "%(i,i,i)
-			logging.info("ENDING dockemu-ftpserver-%s"%i)
-			print cmd
-			try:
-				p = subprocess.Popen(cmd , shell=True)
-				print s
-			except:
-				failed=True
-				print "failed to stop dockemu-ftpserver-%s!!"%i
-	except:
-		cmd="docker stop $(docker ps -a -q) && docker rm $(docker ps -a -q)"
-		p = subprocess.Popen(cmd , shell=True)
-	
 
-	try:
-		for i in range(bots):
-			cmd="docker kill dockemu-%s && docker stop dockemu-%s  && docker rm dockemu-%s "%(i,i,i)
-			logging.info("ENDING dockemu-%s"%i)
-			print cmd
-			try:
-				p = subprocess.Popen(cmd , shell=True)
-				print s
-			except:
-				failed=True
-				print "failed to stop dockemu-%s!!"%i
-	except:
-		cmd="docker stop $(docker ps -a -q) && docker rm $(docker ps -a -q)"
-		p = subprocess.Popen(cmd , shell=True)
+def stats():
+	client = pymongo.MongoClient(mongo_server, mongo_port)
+	db = client[dbname]
+	collection = db['collection']
+	ip = '172.17.1.33'
 
+
+
+	#Finding false matches
+	falseMatches = collection.find_one({'sourceIP':'172.17.1.33'},{'falseMatch':1,'_id':0})
+	print falseMatches
+
+	print falseMatches['falseMatch']
+
+
+def main():
+	welcome
+	#start_ftpservers
+	#start_botnet
+	#stop_all
+	#stats
+
+
+if __name__ == "__main__":
+    main()
