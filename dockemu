@@ -258,7 +258,7 @@ def stats_bots(dbname):
 	except:
 		print traceback.format_exc()
 
-def stats_servers():
+def stats_servers(dbname):
 	client = pymongo.MongoClient(mongo_server, mongo_port)
 	db = client[dbname]
 	correlation="logs"
