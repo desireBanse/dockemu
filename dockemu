@@ -185,8 +185,8 @@ def stop_all():
 				logging.info("ENDING %s"%container)
 		except:
 			print "execept"
-			#cmd="docker stop $(docker ps -a -q) && docker rm $(docker ps -a -q)"
-			#p = subprocess.Popen(cmd , shell=True)
+			cmd="docker stop $(docker ps -a -q) && docker rm $(docker ps -a -q)"
+			p = subprocess.Popen(cmd , shell=True)
 
 
 
