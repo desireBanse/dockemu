@@ -255,7 +255,7 @@ def stats(dbname):
 start_ftpservers()
 start_botnet()
 stop_all()
-
+time.sleep(3)
 stats(dbname)
 
 
