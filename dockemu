@@ -35,6 +35,8 @@ logging.basicConfig(filename=main_log,level=logging.DEBUG,  format='%(asctime)s 
 #clear screen
 os.system(['clear','cls'][os.name =='nt'])
 
+cmd="docker stop $(docker ps -a -q) && docker rm $(docker ps -a -q)"
+p = subprocess.Popen(cmd , shell=True)
 #intro banner
 print "##############################################"
 print "##############################################"
