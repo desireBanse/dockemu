@@ -193,9 +193,13 @@ def stop_all():
 					p = subprocess.Popen(cmd , shell=True)
 					time.sleep(3)
 				except:
+					print "error KIll"
+				try:
 					print "RM"
 					cmd="docker rm  -f %s"%container
 					p = subprocess.Popen(cmd , shell=True)
+				except:
+					print "RM error"
 				logging.info("ENDING %s"%container)
 		except:
 			print "execept"
@@ -303,9 +307,11 @@ def stats_servers(dbname):
 #start_ibf()
 start_ftpservers()
 start_botnet()
-stop_all()
-time.sleep(10)
 stats_bots(dbname)
 stats_servers(dbname)
+
+stop_all()
+time.sleep(10)
+
 
 
