@@ -22,7 +22,7 @@ ftpservers=1
 imagegg="dockemu/ftp:staticip"    #get image for good guys with ftp server and static ip
 imagebot="dockemu/botnet"         #get image for botnet guys
 server="172.17.5.100"
-duration=20
+duration=5
 delay=0
 dockers=[]
 
