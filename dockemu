@@ -61,6 +61,8 @@ except KeyboardInterrupt:
 except:
 	print " mongo DB name not provided, using defaults (%s)"%dbname
 	print
+	dbname="dbTest150223_2215"
+
 
 try:
 	ftpservers = input('How many ftpservers do you need? [defaults=%s]: '%ftpservers)
