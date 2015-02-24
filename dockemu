@@ -217,7 +217,8 @@ def stats(dbname):
 		try:
 			count.append(falseMatches['falseMatch'])
 		except:
-			pass
+			print traceback.format_exc()
+			
 	print count
 
 	try:
@@ -241,7 +242,7 @@ def stats(dbname):
 		print "MIN: "+str(minimum)
 		workbook.close()
 	except:
-		pass
+		print traceback.format_exc()
 
 
 #start_ibf()
