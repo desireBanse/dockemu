@@ -54,7 +54,7 @@ print ""
 
 
 try:
-	dbname = input('Enter the mongo DB name: [defaults=%s]: '%dbname)
+	dbname = raw_input('Enter the mongo DB name: [defaults=%s]: '%dbname)
 	print
 except KeyboardInterrupt:
 	sys.exit(0)
