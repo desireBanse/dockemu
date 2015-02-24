@@ -238,6 +238,7 @@ def stats(dbname):
 		stdev=statistics.stdev(count)
 		maximum=max(count)
 		minimum=min(count)
+		
 		workbook = xlsxwriter.Workbook('dockemu.xlsx')
 		worksheet = workbook.add_worksheet()
 		row=0
