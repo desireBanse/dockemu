@@ -210,6 +210,7 @@ def stats(dbname):
 	#Finding false matches
 	for ip in bot_ips:
 		falseMatches = collection.find_one({'sourceIP':ip.strip()},{'falseMatch':1,'_id':0})
+		print falseMatches
 		array+=[falseMatches]
 
 	count=[]
