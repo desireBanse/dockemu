@@ -11,7 +11,8 @@ echo "running $duration"
 
 server=${1:-$attack_servers}
 
-rm tem.file
+rm tem.file 2>/dev/null
+
 for item in $server;do
 	echo $item >> tem.file
 	echo  >> tem.file
