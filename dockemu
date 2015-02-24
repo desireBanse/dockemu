@@ -304,6 +304,7 @@ start_ftpservers()
 start_botnet()
 stop_all()
 time.sleep(10)
-stats(dbname)
+stats_bots(dbname)
+stats_servers(dbname)
 
 
