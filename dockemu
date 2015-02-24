@@ -191,7 +191,7 @@ def stop_all():
 
 
 
-def stats():
+def stats(dbname):
 	client = pymongo.MongoClient(mongo_server, mongo_port)
 	db = client[dbname]
 	collection = db[correlation]
@@ -225,14 +225,11 @@ def stats():
 	print "MIN: "+str(minimum)
 
 
-def main():
-	#start_ibf()
-	start_ftpservers()
-	start_botnet()
-	stop_all()
 
-	stats()
+start_ftpservers()
+start_botnet()
+stop_all()
+
+stats(dbname)
 
 
-if __name__ == "__main__":
-    main()
