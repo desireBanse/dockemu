@@ -227,8 +227,8 @@ def stats(dbname):
 	col=0
 	for ip,times in zip(bot_ips,count):
 		worksheet.write(row, col, ip)
-	    worksheet.write(row, col + 1, times)
-	    row += 1
+		worksheet.write(row, col + 1, times)
+		row += 1
 	print "AVERAGE: "+str(mean)
 	print "MEDIAN: "+str(median)
 	print "STDEV: "+str(stdev)
