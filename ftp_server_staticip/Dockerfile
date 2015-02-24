@@ -23,7 +23,7 @@ ADD java/ /
 
 ENV ipaddress 172.17.5.100
 
-RUN echo "  *.* @192.168.8.66" >>  /etc/rsyslog.conf
+RUN echo " *.* @192.168.8.66" >>  /etc/rsyslog.conf
 
 RUN  /bin/sed -i "/SystemLog/s/^/#/"   /etc/proftpd/proftpd.conf  
 RUN echo ' LogFormat default "%h %l %u %t \"%r\" %s %b"' >> /etc/proftpd/proftpd.conf
