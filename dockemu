@@ -204,8 +204,8 @@ def stats(dbname):
 	client = pymongo.MongoClient(mongo_server, mongo_port)
 	db = client[dbname]
 	collection = db[correlation]
-	ip = ['172.17.1.33','172.17.1.34','172.17.1.17','61.174.49.103','88.150.196.163','213.154.85.75','91.240.163.39','77.222.131.3']
-	dbname="dbTest150210-1200"
+	#ip = ['172.17.1.33','172.17.1.34','172.17.1.17','61.174.49.103','88.150.196.163','213.154.85.75','91.240.163.39','77.222.131.3']
+	#dbname="dbTest150210-1200"
 
 
 	#array=[{u'falseMatch': 8}, {u'falseMatch': 4}, {u'falseMatch': 5}, {u'falseMatch': 6}]
@@ -213,7 +213,7 @@ def stats(dbname):
 	array=[]
 	#Finding false matches
 	for ip in bot_ips:
-		falseMatches = collection.find_one({'sourceIP':ip.strip()},{'falseMatch':1,'_id':0})
+		falseMatches = collection.find_one({'sourceIP':'"'+str(ip.strip())+'"'},{'falseMatch':1,'_id':0})
 		print ip.strip()+"as"
 		print falseMatches
 		array+=[falseMatches]
