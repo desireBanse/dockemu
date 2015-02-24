@@ -35,7 +35,7 @@ logging.basicConfig(filename=main_log,level=logging.DEBUG,  format='%(asctime)s 
 #clear screen
 os.system(['clear','cls'][os.name =='nt'])
 
-cmd="docker stop $(docker ps -a -q) &>/dev/null  && docker rm $(docker ps -a -q) &>/dev/null"
+cmd="docker stop $(docker ps -a -q &>/dev/null ) &>/dev/null  && docker rm $(docker ps -a -q &>/dev/null ) &>/dev/null"
 p = subprocess.Popen(cmd , shell=True)
 #intro banner
 print "##############################################"
@@ -238,7 +238,7 @@ def stats(dbname):
 		stdev=statistics.stdev(count)
 		maximum=max(count)
 		minimum=min(count)
-		
+
 		workbook = xlsxwriter.Workbook('dockemu.xlsx')
 		worksheet = workbook.add_worksheet()
 		row=0
