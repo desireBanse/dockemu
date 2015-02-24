@@ -239,7 +239,7 @@ def stats(dbname):
 
 
 
-start_ibf()
+#start_ibf()
 start_ftpservers()
 start_botnet()
 stop_all()
