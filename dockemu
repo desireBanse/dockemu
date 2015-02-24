@@ -2,7 +2,7 @@
 import subprocess, logging
 import sys, os, time
 import traceback
-import pymongo, json, statistics
+import pymongo, json, statistics,xlsxwriter
 
 ROOT=os.path.dirname(os.path.abspath(__file__))
 
@@ -224,11 +224,11 @@ def stats(dbname):
 	stdev=statistics.stdev(count)
 	maximum=max(count)
 	minimum=min(count)
-
+	workbook = xlsxwriter.Workbook('dockemu.xlsx')
+	worksheet = workbook.add_worksheet()
 	row=0
 	col=0
 	for ip,times in zip(bot_ips,count):
-
 		worksheet.write(row, col, ip)
 	    worksheet.write(row, col + 1, times)
 	    row += 1
@@ -237,6 +237,8 @@ def stats(dbname):
 	print "STDEV: "+str(stdev)
 	print "MAX: "+str(maximum)
 	print "MIN: "+str(minimum)
+	workbook.close()
+
 
 
 start_ibf
