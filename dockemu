@@ -270,6 +270,7 @@ def stats_servers(dbname):
 	for ip in ftpserver_ips:
 		times = collection.find({'destinationIP':ip.strip()}).count()
 		print times
+		print ip
 		#print ip.strip()+"as"
 		#print falseMatches
 		count+=[times]
