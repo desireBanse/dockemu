@@ -93,13 +93,10 @@ except:
 
 def start_ibf():
 	print "start IBF server"
-<<<<<<< HEAD
-	cmd = "/usr/bin/java -cp java -cp 'frameworkssh.jar:commons-io-2.4.jar:mongo-java-driver-2.12.2.jar' com.galileo.phd.securityframework.ssh.core.Main -logFilePath /var/log/auth.log -mongoServer monserver.galileo.edu -database %s -protocol ftp:proftpd"%dbname
+	#cmd = "/usr/bin/java -cp java -cp 'frameworkssh.jar:commons-io-2.4.jar:mongo-java-driver-2.12.2.jar' com.galileo.phd.securityframework.ssh.core.Main -logFilePath /var/log/auth.log -mongoServer monserver.galileo.edu -database %s -protocol ftp:proftpd"%dbname
 	#p = subprocess.Popen(cmd , shell=True,cwd="/home/chepeftw")
-=======
-	cmd = "/usr/bin/java -cp frameworkssh.jar:commons-io-2.4.jar:mongo-java-driver-2.12.2.jar com.galileo.phd.securityframework.ssh.core.Main -logFilePath /var/log/auth.log -mongoServer monserver.galileo.edu -database %s"%dbname
+	cmd = "/usr/bin/java -cp 'frameworkssh.jar:commons-io-2.4.jar:mongo-java-driver-2.12.2.jar' s com.galileo.phd.securityframework.ssh.core.Main -logFilePath /var/log/auth.log -mongoServer monserver.galileo.edu -database %s"%dbname
 	p = subprocess.Popen(cmd , shell=True)
->>>>>>> 69a4853c1fa9fa5fdc9f67d0651875946c5c0755
 
 names=[]
 
