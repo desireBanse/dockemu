@@ -307,12 +307,11 @@ def stats_servers(dbname):
 #start_ibf()
 start_ftpservers()
 start_botnet()
-stats_servers(dbname)
 
 stop_all()
 time.sleep(10)
 stats_bots(dbname)
-
+stats_servers(dbname)
 
 
 
