@@ -11,6 +11,12 @@ echo "running $duration"
 
 server=${1:-$attack_servers}
 
+for item in $server;do
+	echo $item > tem.file
+done
+
+
+server=$(shuf -n 100 tem.file)
 count=0
 while  ! [ true -a  $count -gt $duration ];do 
 	
