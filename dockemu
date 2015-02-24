@@ -214,7 +214,10 @@ def stats(dbname):
 
 	count=[]
 	for falseMatches in array:
-		count.append(falseMatches['falseMatch'])
+		try:
+			count.append(falseMatches['falseMatch'])
+		except:
+			pass
 	print count
 
 	mean=statistics.mean(count)
