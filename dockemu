@@ -183,10 +183,12 @@ def stop_all():
 			for container in dockers:
 				print "Killing %s"%container
 				cmd="docker kill %s"%container
-				p = subprocess.Popen(cmd , shell=True)
-				time.sleep(3)
-				cmd="docker rm  -f %s"%container
-				p = subprocess.Popen(cmd , shell=True)
+				try:
+					p = subprocess.Popen(cmd , shell=True)
+					time.sleep(3)
+				except:
+					cmd="docker rm  -f %s"%container
+					p = subprocess.Popen(cmd , shell=True)
 				logging.info("ENDING %s"%container)
 		except:
 			print "execept"
