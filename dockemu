@@ -94,7 +94,7 @@ except:
 def start_ibf():
 	print "start IBF server"
 	cmd = "/usr/bin/java -cp frameworkssh.jar:commons-io-2.4.jar:mongo-java-driver-2.12.2.jar com.galileo.phd.securityframework.ssh.core.Main -logFilePath /var/log/auth.log -mongoServer monserver.galileo.edu -database %s"%dbname
-	#p = subprocess.Popen(cmd , shell=True,cwd="/home/chepeftw")
+	p = subprocess.Popen(cmd , shell=True)
 
 names=[]
 
@@ -118,6 +118,8 @@ def start_ftpservers():
 				logging.info("STARTING dockemu-ftpserver-%s with IPAddress 172.17.%s.5"%(i,i))
 				dockers.append("dockemu-ftpserver-%s"%i)
 				ftpserver_ips.append("172.17.%s.5 "%i)
+				cmd="/usr/bin/java -cp 'frameworkssh.jar:commons-io-2.4.jar:mongo-java-driver-2.12.2.jar' com.galileo.phd.securityframework.ssh.core.NewFireWall -firewallIp 172.17.%s.5 -database %s -mongoServer monserver.galileo.edu"%(i,dbname)
+				p = subprocess.Popen(cmd , shell=True)
 				time.sleep(1)
 			except:
 				print traceback.format_exc()
@@ -218,6 +220,13 @@ def stats(dbname):
 	maximum=max(count)
 	minimum=min(count)
 
+	row=0
+	col=0
+	for ip,times in zip(bot_ips,count):
+
+		worksheet.write(row, col, ip)
+	    worksheet.write(row, col + 1, times)
+	    row += 1
 	print "AVERAGE: "+str(mean)
 	print "MEDIAN: "+str(median)
 	print "STDEV: "+str(stdev)
@@ -225,7 +234,7 @@ def stats(dbname):
 	print "MIN: "+str(minimum)
 
 
-
+start_ibf
 start_ftpservers()
 start_botnet()
 stop_all()
