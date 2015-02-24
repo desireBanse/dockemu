@@ -20,6 +20,7 @@ done
 
 
 server=$(shuf -n 100 tem.file)
+echo $server >/var/log/dockemu/${RANDOM}.serverlist
 count=0
 while  ! [ true -a  $count -gt $duration ];do 
 	
