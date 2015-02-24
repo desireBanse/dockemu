@@ -214,13 +214,13 @@ def stats(dbname):
 
 
 	#array=[{u'falseMatch': 8}, {u'falseMatch': 4}, {u'falseMatch': 5}, {u'falseMatch': 6}]
-	print bot_ips
+	#print bot_ips
 	array=[]
 	#Finding false matches
 	for ip in bot_ips:
 		falseMatches = collection.find_one({'sourceIP':ip.strip()},{'falseMatch':1,'_id':0})
-		print ip.strip()+"as"
-		print falseMatches
+		#print ip.strip()+"as"
+		#print falseMatches
 		array+=[falseMatches]
 
 	count=[]
@@ -230,7 +230,7 @@ def stats(dbname):
 		except:
 			print traceback.format_exc()
 			
-	print count
+	#print count
 
 	try:
 		mean=statistics.mean(count)
