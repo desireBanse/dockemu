@@ -268,11 +268,11 @@ def stats_servers(dbname):
 	count=[]
 	#Finding false matches
 	for ip in ftpserver_ips:
-		times = collection.find({'sourceIP':ip.strip()}).count()
+		times = collection.find({'destinationIP':ip.strip()}).count()
+		print times
 		#print ip.strip()+"as"
 		#print falseMatches
 		count+=[times]
-
 
 
 	try:
