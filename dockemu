@@ -10,7 +10,7 @@ ROOT=os.path.dirname(os.path.abspath(__file__))
 #MONGO
 mongo_server='192.168.8.10'
 mongo_port=27017 
-dbname="dbTest150222_1200"
+dbname="dbTest150223_2215"
 correlation="correlation"
 
 #logging options: 
