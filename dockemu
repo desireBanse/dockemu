@@ -220,26 +220,28 @@ def stats(dbname):
 			pass
 	print count
 
-	mean=statistics.mean(count)
-	median= statistics.median(count)
-	stdev=statistics.stdev(count)
-	maximum=max(count)
-	minimum=min(count)
-	workbook = xlsxwriter.Workbook('dockemu.xlsx')
-	worksheet = workbook.add_worksheet()
-	row=0
-	col=0
-	for ip,times in zip(bot_ips,count):
-		worksheet.write(row, col, ip)
-		worksheet.write(row, col + 1, times)
-		row += 1
-	print "AVERAGE: "+str(mean)
-	print "MEDIAN: "+str(median)
-	print "STDEV: "+str(stdev)
-	print "MAX: "+str(maximum)
-	print "MIN: "+str(minimum)
-	workbook.close()
-
+	try:
+		mean=statistics.mean(count)
+		median= statistics.median(count)
+		stdev=statistics.stdev(count)
+		maximum=max(count)
+		minimum=min(count)
+		workbook = xlsxwriter.Workbook('dockemu.xlsx')
+		worksheet = workbook.add_worksheet()
+		row=0
+		col=0
+		for ip,times in zip(bot_ips,count):
+			worksheet.write(row, col, ip)
+			worksheet.write(row, col + 1, times)
+			row += 1
+		print "AVERAGE: "+str(mean)
+		print "MEDIAN: "+str(median)
+		print "STDEV: "+str(stdev)
+		print "MAX: "+str(maximum)
+		print "MIN: "+str(minimum)
+		workbook.close()
+	except:
+		pass
 
 
 #start_ibf()
