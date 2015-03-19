@@ -3,10 +3,13 @@ import subprocess, logging
 import sys, os, time
 import traceback
 
-ROOT=os.path.dirname(os.path.abspath(__file__))
+#ROOT=os.path.dirname(os.path.abspath(__file__))
+#ROOT=os.readlink(os.path.abspath(__file__))
 
-print ROOT
-exit 
+print os.readlink(os.path.abspath(__file__))
+sys.exit(0)
+
+ 
 main_log=ROOT+"/log/dockemu.log"
 #defaults:
 bots=2
@@ -110,15 +113,34 @@ if duration > 0:
 	time.sleep(duration)
 	try:
 		for i in range(bots):
-			cmd="docker kill dockemu-%s && docker stop dockemu-%s  && docker rm dockemu-%s "%(i,i,i)
+			#cmd="docker kill dockemu-%s && docker stop dockemu-%s  && docker rm dockemu-%s "%(i,i,i)
 			logging.info("ENDING dockemu-%s"%i)
-			print cmd
+			#print cmd
 			try:
+				cmd="docker kill dockemu-%s"%i
+				print cmd
+				p = subprocess.Popen(cmd , shell=True)
+				print s
+			except:
+				failed=True
+				print "failed to kill dockemu-%s!!"%i
+			try:
+				cmd="docker stop dockemu-%s"%i
+				print cmd
 				p = subprocess.Popen(cmd , shell=True)
 				print s
 			except:
 				failed=True
 				print "failed to stop dockemu-%s!!"%i
+			try:
+				cmd="docker rm dockemu-%s"%i
+				print cmd
+				p = subprocess.Popen(cmd , shell=True)
+				print s
+			except:
+				failed=True
+				print "failed to stop dockemu-%s!!"%i
+
 	except:
 		cmd="docker stop $(docker ps -a -q) && docker rm $(docker ps -a -q)"
 		p = subprocess.Popen(cmd , shell=True)
