@@ -7,7 +7,7 @@ import traceback
 #ROOT=os.readlink(os.path.abspath(__file__))
 
 print os.readlink(os.path.abspath(__file__))
-sys.exit(0)
+#sys.exit(0)
 
  
 main_log=ROOT+"/log/dockemu.log"
