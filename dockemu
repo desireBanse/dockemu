@@ -139,7 +139,7 @@ if duration > 0:
 				print s
 			except:
 				failed=True
-				print "failed to stop dockemu-%s!!"%i
+				print "failed to rm dockemu-%s!!"%i
 
 	except:
 		cmd="docker stop $(docker ps -a -q) && docker rm $(docker ps -a -q)"
